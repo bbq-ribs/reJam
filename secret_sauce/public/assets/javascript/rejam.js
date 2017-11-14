@@ -136,7 +136,8 @@
         }
       }).done(function(data) {
         console.log(data);
-        return data;
+        listSetlist(data);
+        // return data;
       });
     }
   }
