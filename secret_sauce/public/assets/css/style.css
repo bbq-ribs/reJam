@@ -1,19 +1,4 @@
-#background {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
-        height: auto;
-        z-index: -100;
-        -webkit-transform: translateX(-50%) translateY(-50%);
-        transform: translateX(-50%) translateY(-50%);
-        background: url(polina.jpg) no-repeat;
-        background-size: cover;
-        opacity: .6;
-    }
-    .container h1 {
+ .container h1 {
         color: white;
     }
     
@@ -25,7 +10,8 @@
     }
 
     .title {
-        float: left;
+        align-content: center;
+        text-align: center;
     }
 
     .middlesearchbar {
@@ -41,3 +27,120 @@
     .footer {
         text-align: center;
     }
+    .input-group    {
+        text-align: center;
+        width: 50%;
+    }
+    .go {
+        background: black;
+        color: white;
+    }
+    .navbar-fixed-left  {
+        width: 30%;
+        position: fixed;
+        border-radius: 0;
+        height: 100%;
+        background: black;
+        color: white;
+    }
+    h1  {
+        text-align: center;
+    }
+    .form-control   {
+        text-align: center;
+    }
+    .pull-right {
+        text-align: right;
+    }
+
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+nav ul a,
+nav .brand-logo {
+    color: #444;
+}
+
+p {
+    line-height: 2rem;
+}
+
+.button-collapse {
+    color: #26a69a;
+}
+
+.parallax-container {
+    min-height: 380px;
+    line-height: 0;
+    height: auto;
+    color: rgba(255,255,255,.9);
+}
+.parallax-container .section {
+    width: 100%;
+}
+
+@media only screen and (max-width : 992px) {
+    .parallax-container .section {
+        position: absolute;
+        top: 40%;
+    }
+    #index-banner .section {
+        top: 10%;
+    }
+}
+
+@media only screen and (max-width : 600px) {
+    #index-banner .section {
+        top: 0;
+    }
+}
+
+.icon-block {
+    padding: 0 15px;
+}
+.icon-block .material-icons {
+    font-size: inherit;
+}
+
+footer.page-footer {
+    margin: 0;
+}
+.firstOne   {
+    background: black;
+}
+.other  {
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+}
+.input-field input [type=search]{
+    padding-left: 2rem;
+
+}
+.other1 {
+    padding-left: 2rem;
+}
+
+ header, main, footer {
+     padding-left: 300px;
+ }
+
+ @media only screen and (max-width : 992px) {
+     header, main, footer {
+         padding-left: 0;
+     }
+ }
+
+ .change-me {
+     background: #3c4554;
+     color: blue;
+ }
+
+ .foot-change   {
+     background-color: white;
+ }
