@@ -96,6 +96,24 @@
     //   false
     // );
 
+    document.getElementById("api-button-1").addEventListener(
+      "click",
+      function() {
+        var myObj = searchSpotify("radiohead+videotape", "track");
+        // console.log(myObj);
+      },
+      false
+    );
+
+    document.getElementById("api-button-2").addEventListener(
+      "click",
+      function() {
+        var myObj = searchSetlist("radiohead");
+        // console.log(myObj);
+      },
+      false
+    );
+
     function searchSpotify(searchString, searchType) {
       $.ajax({
         url: "/search_spotify",
