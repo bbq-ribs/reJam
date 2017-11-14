@@ -1,4 +1,4 @@
-(function() {
+(function () {
   /**
        * Obtains parameters from the hash of the URL
        * @return Object
@@ -15,7 +15,7 @@
   }
 
   var userProfileSource = document.getElementById("user-profile-template")
-      .innerHTML,
+    .innerHTML,
     userProfileTemplate = Handlebars.compile(userProfileSource),
     userProfilePlaceholder = document.getElementById("user-profile");
 
@@ -44,7 +44,7 @@
         headers: {
           Authorization: "Bearer " + access_token
         },
-        success: function(response) {
+        success: function (response) {
           userProfilePlaceholder.innerHTML = userProfileTemplate(response);
 
           $("#login").hide();
@@ -59,13 +59,13 @@
 
     document.getElementById("obtain-new-token").addEventListener(
       "click",
-      function() {
+      function () {
         $.ajax({
           url: "/refresh_token",
           data: {
             refresh_token: refresh_token
           }
-        }).done(function(data) {
+        }).done(function (data) {
           access_token = data.access_token;
           oauthPlaceholder.innerHTML = oauthTemplate({
             access_token: access_token,
@@ -75,6 +75,34 @@
       },
       false
     );
+    var setlistSongs;
+
+    $("searchButton").on("click", function(){
+      var setlistResponse;
+      var userSearch = $("#input").text();
+      console.log(userSearch);
+      var setlistObj = searchSetlist(userSearch);
+      listSetList(setlistObj);
+    });
+ 
+    function listSetList(obj) {
+      for (var i = 0; i < obj.setlist.length; i++) {
+        //display the reponse's venue city and date for all the results
+        var a = $("<div><p>" + obj.setlist[i].venue + " " + obj.setlist[i].venue.city.name + "," + obj.setlist[i].venue.city.stateCode + " " + obj.setlist[i].eventDate + " " + obj.setlist[i].id + "</p></div>")
+        $(a).attr({
+          "idName": "response" + i,
+          "idHash": obj.setlist[i].venue.id,
+          "class": "aReponse"
+        });
+      }
+    }
+
+    $(".aResponse").on("click", function () {
+      var id = this.idHash;
+      setlistSongs = searchSetlist(id);
+      listSetList(setListSongs);
+    });
+
 
     // document.getElementById("check-album-search").addEventListener(
     //   "click",
@@ -96,24 +124,6 @@
     //   false
     // );
 
-    document.getElementById("api-button-1").addEventListener(
-      "click",
-      function() {
-        var myObj = searchSpotify("radiohead+videotape", "track");
-        // console.log(myObj);
-      },
-      false
-    );
-
-    document.getElementById("api-button-2").addEventListener(
-      "click",
-      function() {
-        var myObj = searchSetlist("radiohead");
-        // console.log(myObj);
-      },
-      false
-    );
-
     function searchSpotify(searchString, searchType) {
       $.ajax({
         url: "/search_spotify",
@@ -122,7 +132,7 @@
           type: searchType,
           access_token: access_token
         }
-      }).done(function(data) {
+      }).done(function (data) {
         console.log(data);
         return data;
       });
@@ -134,7 +144,7 @@
         data: {
           artistName: searchString
         }
-      }).done(function(data) {
+      }).done(function (data) {
         console.log(data);
         return data;
       });
