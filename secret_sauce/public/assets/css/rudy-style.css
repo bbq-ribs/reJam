@@ -135,3 +135,12 @@ footer.page-footer {
          padding-left: 0;
      }
  }
+
+ .change-me {
+     background: #3c4554;
+     color: blue;
+ }
+
+ .foot-change   {
+     background-color: white;
+ }
