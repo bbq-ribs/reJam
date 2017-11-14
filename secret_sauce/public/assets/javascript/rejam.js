@@ -76,18 +76,35 @@
       false
     );
 
+    // document.getElementById("check-album-search").addEventListener(
+    //   "click",
+    //   function() {
+    //     $.ajax({
+    //       url: "https://api.spotify.com/v1/search",
+    //       headers: {
+    //         Accept: "application / json",
+    //         Authorization: "Bearer " + access_token
+    //       },
+    //       data: {
+    //         q: "muse+absolution",
+    //         type: "album"
+    //       }
+    //     }).done(function(data) {
+    //       console.log(data);
+    //     });
+    //   },
+    //   false
+    // );
+
     document.getElementById("check-album-search").addEventListener(
       "click",
       function() {
         $.ajax({
-          url: "https://api.spotify.com/v1/search",
-          headers: {
-            Accept: "application / json",
-            Authorization: "Bearer " + access_token
-          },
+          url: "/search_spotify",
           data: {
-            q: "muse+absolution",
-            type: "album"
+            q: "radiohead+like+spinning+plates",
+            type: "track",
+            access_token: access_token
           }
         }).done(function(data) {
           console.log(data);

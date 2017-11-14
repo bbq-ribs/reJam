@@ -13,7 +13,7 @@ var querystring = require("querystring");
 var cookieParser = require("cookie-parser");
 
 var client_id = "e45ed3cdf4e4442a8bc1fc79a1c2fa0f"; // Your client id
-var client_secret = ""; // Your secret
+var client_secret = "680ae8e7d4924e7798741a3aa2de09e1"; // Your secret
 var redirect_uri = "http://localhost:8888/callback"; // Your redirect uri
 
 /**
@@ -43,7 +43,7 @@ app.get("/login", function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = "user-read-private user-read-email";
+  var scope = "user-read-private user-read-email playlist-modify-public playlist-modify-private";
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
@@ -151,33 +151,79 @@ app.get("/refresh_token", function(req, res) {
   });
 });
 
+app.get("/search_spotify", function(req, res) {
+  var searchTerm = req.query.q;
+  var searchType = req.query.type;
+  var access_token = req.query.access_token;
+
+  console.log("sending spotify request");
+
+  var options = {
+    url: "https://api.spotify.com/v1/search?q=" + searchTerm + "&type=" + searchType,
+    headers: {
+      Authorization: "Bearer " + access_token
+    },
+    json: true
+  };
+
+  request.get(options, function(error, response, body) {
+    console.log(response.statusCode);
+    if (!error && response.statusCode === 200) {
+      console.log("Request Made!");
+      res.send(body);
+    }
+  });
+});
+
+app.get("/create_spotify_playlist", function(req, res) {
+  var access_token = req.query.access_token;
+
+  console.log("sending create spotify playlist request");
+
+  var options = {
+    url:
+      "https://api.spotify.com/v1/search?q=" +
+      searchTerm +
+      "&type=" +
+      searchType,
+    headers: {
+      Authorization: "Bearer " + access_token
+    },
+    json: true
+  };
+
+  request.get(options, function(error, response, body) {
+    console.log(response.statusCode);
+    if (!error && response.statusCode === 200) {
+      console.log("Request Made!");
+      res.send(body);
+    }
+  });
+});
+
 app.get("/search_setlist", function(req, res) {
   var artistName = req.query.artistName;
 
   console.log("sending setlist.fm request");
 
   var options = {
-    url: "https://api.setlist.fm/rest/1.0/search/setlists?artistName=" + artistName,
+    url:
+      "https://api.setlist.fm/rest/1.0/search/setlists?artistName=" +
+      artistName,
     headers: {
       Accept: "application/json",
       "x-api-key": "a00dce36-dd8d-4962-9ebd-c4234b60e0f5"
     }
-    // data: {
-    //   artistName: artistName
-    // }
   };
 
-  function callback(error, response, body) {
+  request.get(options, function(error, response, body) {
     console.log(response.statusCode);
-    if (!error && response.statusCode == 200) {
+    if (!error && response.statusCode === 200) {
       var info = JSON.parse(body);
       console.log("Request Made!");
       res.send(info);
     }
-  }
-
-  request(options, callback);
-
+  });
 });
 
 console.log("Listening on 8888");
