@@ -96,36 +96,30 @@
     //   false
     // );
 
-    document.getElementById("check-album-search").addEventListener(
-      "click",
-      function() {
-        $.ajax({
-          url: "/search_spotify",
-          data: {
-            q: "radiohead+like+spinning+plates",
-            type: "track",
-            access_token: access_token
-          }
-        }).done(function(data) {
-          console.log(data);
-        });
-      },
-      false
-    );
+    function searchSpotify(searchString, searchType) {
+      $.ajax({
+        url: "/search_spotify",
+        data: {
+          q: searchString,
+          type: searchType,
+          access_token: access_token
+        }
+      }).done(function(data) {
+        console.log(data);
+        return data;
+      });
+    }
 
-    document.getElementById("check-setlist-search").addEventListener(
-      "click",
-      function() {
-        $.ajax({
-          url: "/search_setlist",
-          data: {
-            artistName: "muse"
-          }
-        }).done(function(data) {
-          console.log(data);
-        });
-      },
-      false
-    );
+    function searchSetlist(searchString) {
+      $.ajax({
+        url: "/search_setlist",
+        data: {
+          artistName: searchString
+        }
+      }).done(function(data) {
+        console.log(data);
+        return data;
+      });
+    }
   }
 })();
