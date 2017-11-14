@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Setlist API Test</title>
+</head>
+
+<body>
+  <button id="api-button">Click Me</button>
+  <div id="images">
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    //capture click on id cat-button
+    $("#api-button").on("click", function () {
+      // $.ajax({
+      //     url: "https://api.setlist.fm/rest/1.0/search/artists",
+      //     method: "GET",
+      //     headers: {
+      //       Origin: "http://localhost",
+      //       Accept: "application/json",
+      //       "x-api-key": "a00dce36-dd8d-4962-9ebd-c4234b60e0f5"
+      //     },
+      //     data: {
+      //       artistName: "outkast"
+      //     }
+      //   }).done(function(data) {
+      //     console.log(data);
+      //   });
+
+
+      // var invocation = new XMLHttpRequest();
+      // var url = 'https://api.setlist.fm/rest/1.0/search/setlists?artistName=muse';
+
+      // function callOtherDomain() {
+      //   if (invocation) {
+      //     invocation.open('GET', url, true);
+      //     invocation.setRequestHeader('accept', 'application/json');
+      //     invocation.setRequestHeader('x-api-key', 'a00dce36-dd8d-4962-9ebd-c4234b60e0f5');
+      //     invocation.onreadystatechange = handler;
+      //     invocation.send();
+      //   }
+      // }
+
+      var myHeaders = new Headers();
+
+      myHeaders.append("accept", "application/json");
+      myHeaders.append("x-api-key", "a00dce36-dd8d-4962-9ebd-c4234b60e0f5");
+      myHeaders.append("host", "api.setlist.fm");
+
+      var myInit = {
+        method: 'GET',
+        headers: myHeaders,
+        mode: 'cors',
+        cache: 'default'
+      };
+
+      var myRequest = new Request("https://api.setlist.fm/rest/1.0/search/setlists?artistName=muse", myInit);
+
+      fetch(myRequest).then(function (response) {
+        var contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          return response.json();
+        }
+        throw new TypeError("Oops, we haven't got JSON!");
+      })
+        .then(function (json) { 
+          /* process your JSON further */ 
+          console.log(json);
+        })
+        .catch(function (error) { console.log(error); });
+
+    });
+  </script>
+</body>
+
+</html>
