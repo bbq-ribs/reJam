@@ -75,6 +75,22 @@
       },
       false
     );
+    var setlistResponse;
+    var userSearch = $("#input").val().trim();
+    
+    $.ajax({
+
+    }).done (function(response){
+      setlistResponse = response;
+      for(var i = 0; i < response.setlist.length; i++ ){
+        //display the reponse's venue city and date for all the results
+        var a = $("<div><p>" + response.setlist[i].venue + " " + response.setlist[i].venue.city.name + "," + response.setlist[i].venue.city.stateCode + " " + response.setlist[i].eventDate +"</p></div>")
+        $(a).attr({
+          "idName": "response",
+          "idHash": reponse.setlist[i].venue.id,
+        });
+      }
+    });
 
     // document.getElementById("check-album-search").addEventListener(
     //   "click",
