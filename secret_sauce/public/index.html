@@ -30,13 +30,10 @@
     <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
         <div class="user-view">
         <div class="background">
-            <img style="width: 100%" src="./assets/images/album.jpg">
+            <div class="songWidget">widget goes here</div>
+
         </div>
-        <li><a href="#!"><i class="material-icons">assignment_ind</i>Artist Name</a></li>
-            <li><a href="#!"><i class="material-icons">music_note</i>Song Name</a></li>
-            <li><a href="#!"><i class="material-icons">today</i>Venue Info</a></li>
-        <li><div class="divider"></div></li>
-            <li><a href="#!"><i class="material-icons">playlist_play</i>Playlist</a></li>
+            <div class="setlist">set list goes appened here</div>
         </div>
 
     </ul>
@@ -52,9 +49,11 @@
                 </div>
                     <div class="other">
                     <div class="input-field row center">
-                        <input style="padding-left: 4rem; background: white" class="input-group" id="search"  type="search" required placeholder="Artist, song, venue ">
-                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                      <!--  <a href="#" id="submit" class="btn-large waves-effect waves-light black">Search</a> -->
+                        <input style="padding-left: 2rem; background: white" class="input-group" id="search"  type="search" placeholder="Artist, song, venue">
+                        <button class="btn waves-effect waves-light black " type="submit" name="action">Search
+                        <i class="material-icons right">search</i>
+                    </button>
+                        <!--  <a href="#" id="submit" class="btn-large waves-effect waves-light black">Search</a> -->
 
                     </div>
                     </div>
@@ -67,46 +66,25 @@
 
     <div class="container">
         <div class="section">
-
-            <!--   Icon Section   -->
             <div class="row">
-                <div class="col s12 m3">
-                    <div class="icon-block">
-                        <h2 class="center red-text"><i class="material-icons">person</i></h2>
-                        <h5 class="center">Brandon</h5>
-
-                        <p class="black-text"> I can change the icons above or the color or both. There can be any text here playlist our info etc Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit.</p>
-                    </div>
-                </div>
-
-                <div class="col s12 m3">
-                    <div class="icon-block">
-                        <h2 class="center blue-text"><i class="material-icons">person</i></h2>
-                        <h5 class="center">Bernard</h5>
-
-                        <p class="black-text"> I can change the icons above or the color or both. There can be any text here playlist our info etc Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit.</p>
-                    </div>
-                </div>
-
-                <div class="col s12 m3">
-                    <div class="icon-block">
-                        <h2 class="center green-text"><i class="material-icons">person</i></h2>
-                        <h5 class="center">Quentin</h5>
-
-                        <p class="black-text"> I can change the icons above or the color or both. There can be any text here playlist our info etc Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit.</p>
-                    </div>
-                </div>
-
-
-                <div class="col s12 m3">
-                    <div class="icon-block">
-                        <h2 class="center orange-text"><i class="material-icons">person</i></h2>
-                        <h5 class="center">Rudy</h5>
-
-                        <p class="black-text"> I can change the icons above or the color or both. There can be any text here playlist our info etc Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit.</p>
-                    </div>
+                <div class="col l12 m12 s12">
+                    <h4 class="black-text artist">Ariana Grande</h4>
                 </div>
             </div>
+            <div class="row">
+                <div class="col l4 m4 s4">
+                    <div class="black-text venue">Honda center</div>
+                </div>
+                    <div class="col l4 m4 s4">
+                    <div class="black-text city">Anaheim</div>
+                    </div>
+                <div class="col l4 m4 s4">
+                    <div class="black-text date">CA</div>
+                </div>
+            </div>
+            </div>
+            <!--   Icon Section   -->
+
 
         </div>
     </div>
