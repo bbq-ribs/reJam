@@ -43,7 +43,8 @@ app.get("/login", function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = "user-read-private user-read-email playlist-modify-public playlist-modify-private";
+  var scope =
+    "user-read-private user-read-email playlist-modify-public playlist-modify-private";
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
@@ -159,7 +160,11 @@ app.get("/search_spotify", function(req, res) {
   console.log("sending spotify request");
 
   var options = {
-    url: "https://api.spotify.com/v1/search?q=" + searchTerm + "&type=" + searchType,
+    url:
+      "https://api.spotify.com/v1/search?q=" +
+      searchTerm +
+      "&type=" +
+      searchType,
     headers: {
       Authorization: "Bearer " + access_token
     },
@@ -177,26 +182,68 @@ app.get("/search_spotify", function(req, res) {
 
 app.get("/create_spotify_playlist", function(req, res) {
   var access_token = req.query.access_token;
+  var user_id = req.query.user_id;
 
-  console.log("sending create spotify playlist request");
+  console.log("sending request to create spotify playlist");
 
   var options = {
-    url:
-      "https://api.spotify.com/v1/search?q=" +
-      searchTerm +
-      "&type=" +
-      searchType,
+    url: "https://api.spotify.com/v1/users/" + user_id + "/playlists",
     headers: {
-      Authorization: "Bearer " + access_token
+      Authorization: "Bearer " + access_token,
+      "Content-Type": "application/json"
+    },
+    body: {
+      name: "reJam"
     },
     json: true
   };
 
-  request.get(options, function(error, response, body) {
+  console.log(options.url);
+
+  request.post(options, function(error, response, body) {
     console.log(response.statusCode);
-    if (!error && response.statusCode === 200) {
+    if (
+      !error &&
+      (response.statusCode === 200 || response.statusCode === 201)
+    ) {
       console.log("Request Made!");
       res.send(body);
+    }
+  });
+});
+
+app.get("/update_spotify_playlist", function(req, res) {
+  var access_token = req.query.access_token;
+  var user_id = req.query.user_id;
+  var playlist_id = req.query.playlist_id;
+  var track_id = req.query.track_id;
+
+  console.log("sending request to update spotify playlist");
+
+  var options = {
+    url:
+      "https://api.spotify.com/v1/users/" +
+      user_id +
+      "/playlists/" +
+      playlist_id +
+      "/tracks?uris=" + track_id,
+    headers: {
+      Authorization: "Bearer " + access_token
+      // "Content-Type": "application/json"
+    },
+    json: true
+  };
+
+  console.log(options.url);
+
+  request.put(options, function(error, response, body) {
+    console.log(response.statusCode);
+    if (
+      !error &&
+      (response.statusCode === 200 || response.statusCode === 201)
+    ) {
+      console.log("Request Made!");
+      // res.send(body);
     }
   });
 });
