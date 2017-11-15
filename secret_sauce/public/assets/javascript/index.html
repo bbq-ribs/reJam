@@ -17,24 +17,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <!--My override stylesheet-->
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="../public/assets/css/style.css">
 
     <title>The Secret Sauce</title>
 </head>
 <body>
-    <!-- Modal Trigger -->
-    <a class="waves-effect waves-light btn modal-trigger" href="#loginModal">Modal</a>
-    
-    <!-- Modal Structure -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <h4>Hey You!</h4>
-            <p class="black-text">Please login to your Spotify Account to reJam</p>
-        </div>
-        <div class="modal-footer">
-            <a href="/login" class="modal-action modal-close waves-effect waves-green btn-flat">Login</a>
-        </div>
-    </div>
 <header>
     <div class="container">
         <a href="#!" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons black-text">menu</i></a>
@@ -43,16 +30,13 @@
     <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
         <div class="user-view">
         <div class="background">
-            <div class="songWidget">
-                <iframe src="https://open.spotify.com/embed?uri=spotify:user:fyffest2013:playlist:6cOVGhHzKFFVhsfqXqFVwv" width="300"
-                    height="380" frameborder="0" allowtransparency="true"></iframe>
-            </div>
-
+            <img style="width: 100%" src="../public/assets/images/album.jpg">
         </div>
-            <div class="setlist">set list goes appened here</div>
-            <button id="api-button-1">Spotify</button>
-            <button id="api-button-2">Create Playlist</button>
-            <button id="api-button-3">Update Playlist</button>
+        <li><a href="#!"><i class="material-icons">assignment_ind</i>Artist Name</a></li>
+            <li><a href="#!"><i class="material-icons">music_note</i>Song Name</a></li>
+            <li><a href="#!"><i class="material-icons">today</i>Venue Info</a></li>
+        <li><div class="divider"></div></li>
+            <li><a href="#!"><i class="material-icons">playlist_play</i>Playlist</a></li>
         </div>
 
     </ul>
@@ -61,46 +45,68 @@
 <div id="index-banner" class="parallax-container">
         <div class="section no-pad-bot">
             <div class="container">
+                <br><br>
                 <h1 class="header center">RE<span class="red-text ion-ios-star"></span>JAM</h1>
                 <div class="row center">
                     <h5 class="header col s12"> Bridging the gap between your ears <span class="ion-headphone"></span> <br> Search for your experience </h5>
                 </div>
                     <div class="other">
-                    <div style="margin-top: -15px;" class="input-field row center">
-                        <input style="padding-left: 2rem; background: white" class="input-group" id="artist-search"  type="search" placeholder="Artist">
-                        <button style="margin-top: -10px;" class="btn waves-effect waves-light black" id="search-button" type="submit" name="action">Search
-                        <i class="material-icons right">search</i>
-                    </button>
-                        <!--  <a href="#" id="submit" class="btn-large waves-effect waves-light black">Search</a> -->
+                    <div class="input-field row center">
+                        <input style="padding-left: 4rem; background: white" class="input-group" id="search"  type="search" required placeholder="Artist, song, venue ">
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                      <!--  <a href="#" id="submit" class="btn-large waves-effect waves-light black">Search</a> -->
+
                     </div>
                     </div>
+                <br><br>
 
             </div>
         </div>
-        <div class="parallax"><img src="./assets/images/parallax6.jpg" alt="..."></div>
+        <div class="parallax"><img src="../public/assets/images/parallax6.jpg" alt="..."></div>
     </div>
 
     <div class="container">
         <div class="section">
-            <div class="row">
-                <div class="col l12 m12 s12">
-                    <h4 class="black-text artist">Ariana Grande</h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col l4 m4 s4">
-                    <div class="black-text venue">Honda center</div>
-                </div>
-                    <div class="col l4 m4 s4">
-                    <div class="black-text city">Anaheim</div>
-                    </div>
-                <div class="col l4 m4 s4">
-                    <div class="black-text date">CA</div>
-                </div>
-            </div>
-            </div>
-            <!--   Icon Section   -->
 
+            <!--   Icon Section   -->
+            <div class="row">
+                <div class="col s12 m3">
+                    <div class="icon-block">
+                        <h2 class="center red-text"><i class="material-icons">person</i></h2>
+                        <h5 class="center">Brandon</h5>
+
+                        <p class="black-text"> I can change the icons above or the color or both. There can be any text here playlist our info etc Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit.</p>
+                    </div>
+                </div>
+
+                <div class="col s12 m3">
+                    <div class="icon-block">
+                        <h2 class="center blue-text"><i class="material-icons">person</i></h2>
+                        <h5 class="center">Bernard</h5>
+
+                        <p class="black-text"> I can change the icons above or the color or both. There can be any text here playlist our info etc Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit.</p>
+                    </div>
+                </div>
+
+                <div class="col s12 m3">
+                    <div class="icon-block">
+                        <h2 class="center green-text"><i class="material-icons">person</i></h2>
+                        <h5 class="center">Quentin</h5>
+
+                        <p class="black-text"> I can change the icons above or the color or both. There can be any text here playlist our info etc Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit.</p>
+                    </div>
+                </div>
+
+
+                <div class="col s12 m3">
+                    <div class="icon-block">
+                        <h2 class="center orange-text"><i class="material-icons">person</i></h2>
+                        <h5 class="center">Rudy</h5>
+
+                        <p class="black-text"> I can change the icons above or the color or both. There can be any text here playlist our info etc Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit.</p>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -114,7 +120,7 @@
                 </div>
             </div>
         </div>
-        <div class="parallax"><img src="./assets/images/parallax2.jpg" alt="Unsplashed background img 2"></div>
+        <div class="parallax"><img src="../public/assets/images/parallax2.jpg" alt="Unsplashed background img 2"></div>
     </div>
 
 
@@ -140,7 +146,7 @@
                 </div>
             </div>
         </div>
-        <div class="parallax"> <img src="./assets/images/parallax.jpg" alt="..."></div>
+        <div class="parallax"> <img src="../public/assets/images/parallax.jpg" alt="..."></div>
     </div>
 
     <!-- I was thinking we can put our github or other contact info when they click on person icon -->
@@ -175,7 +181,7 @@
                 </div>
             </div>
         </div>
-        <div class="parallax"><img class="stretch" src="./assets/images/parallax4.jpg" alt=""></div>
+        <div class="parallax"><img class="stretch" src="../public/assets/images/parallax4.jpg" alt=""></div>
     </div>
 
 </main>
@@ -245,8 +251,8 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-    <script src="/assets/javascript/rejam.js"></script>
-   <!--  <script src="js/init.js"></script> -->
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
 <script>
     $(document).ready(function(){
         $('.parallax').parallax();
