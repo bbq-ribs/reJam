@@ -34,64 +34,31 @@ jQuery(function($) {
     }
   }
 
-  // document.getElementById("obtain-new-token").addEventListener(
-  //   "click",
-  //   function() {
-  //     $.ajax({
-  //       url: "/refresh_token",
-  //       data: {
-  //         refresh_token: refresh_token
-  //       }
-  //     }).done(function(data) {
-  //       access_token = data.access_token;
-  //       oauthPlaceholder.innerHTML = oauthTemplate({
-  //         access_token: access_token,
-  //         refresh_token: refresh_token
-  //       });
-  //     });
-  //   },
-  //   false
-  // );
+  //seach button clicked, search setlist.fm
+  $("#search-button").on("click", function() {
+    console.log("Search Clicked");
+    var searchString = $("#artist-search").val();
+    searchSetlist(searchString);
+  });
 
-  // document.getElementById("check-album-search").addEventListener(
-  //   "click",
-  //   function() {
-  //     $.ajax({
-  //       url: "https://api.spotify.com/v1/search",
-  //       headers: {
-  //         Accept: "application / json",
-  //         Authorization: "Bearer " + access_token
-  //       },
-  //       data: {
-  //         q: "muse+absolution",
-  //         type: "album"
-  //       }
-  //     }).done(function(data) {
-  //       console.log(data);
-  //     });
-  //   },
-  //   false
-  // );
+  $("#api-button-1").on("click", function() {
+    console.log("this works");
+    var myObj = searchSpotify("radiohead+videotape", "track");
+    // console.log(myObj);
+  });
 
-  document.getElementById("api-button-1").addEventListener(
-    "click",
-    function() {
-      console.log("this works");
-      var myObj = searchSpotify("radiohead+videotape", "track");
-      // console.log(myObj);
-    },
-    false
-  );
+  //list setlists obtained from artist search
+  function listSetlist(searchResults){
+    //Q's code goes here
+    console.log("Updating Page w/ Artist Shows")
+  }
 
-  document.getElementById("api-button-2").addEventListener(
-    "click",
-    function() {
-      var myObj = searchSetlist("radiohead");
-      // console.log(myObj);
-    },
-    false
-  );
+  //setlist <div> clicked, generate playlists w/ songs & refresh widget
+  function generateSpotifyPlaylist(setlistId){
+    
+  }
 
+  //search spotify for string and specified type (artist, album, track)
   function searchSpotify(searchString, searchType) {
     $.ajax({
       url: "/search_spotify",
@@ -106,6 +73,7 @@ jQuery(function($) {
     });
   }
 
+  //search setlist.fm for setlist and call listSetlist with the results
   function searchSetlist(searchString) {
     $.ajax({
       url: "/search_setlist",
@@ -115,7 +83,6 @@ jQuery(function($) {
     }).done(function(data) {
       console.log(data);
       listSetlist(data);
-      // return data;
     });
   }
   // }

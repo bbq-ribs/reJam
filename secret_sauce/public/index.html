@@ -43,12 +43,14 @@
     <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
         <div class="user-view">
         <div class="background">
-            <div class="songWidget">widget goes here</div>
+            <div class="songWidget">
+                <iframe src="https://open.spotify.com/embed?uri=spotify:user:fyffest2013:playlist:6cOVGhHzKFFVhsfqXqFVwv" width="300"
+                    height="380" frameborder="0" allowtransparency="true"></iframe>
+            </div>
 
         </div>
             <div class="setlist">set list goes appened here</div>
             <button id="api-button-1">Spotify</button>
-            <button id="api-button-2">Setlist</button>
         </div>
 
     </ul>
@@ -63,8 +65,8 @@
                 </div>
                     <div class="other">
                     <div style="margin-top: -15px;" class="input-field row center">
-                        <input style="padding-left: 2rem; background: white" class="input-group" id="search"  type="search" placeholder="Artist, song, venue">
-                        <button style="margin-top: -10px;" class="btn waves-effect waves-light black " type="submit" name="action">Search
+                        <input style="padding-left: 2rem; background: white" class="input-group" id="artist-search"  type="search" placeholder="Artist">
+                        <button style="margin-top: -10px;" class="btn waves-effect waves-light black" id="search-button" type="submit" name="action">Search
                         <i class="material-icons right">search</i>
                     </button>
                         <!--  <a href="#" id="submit" class="btn-large waves-effect waves-light black">Search</a> -->
