@@ -199,5 +199,5 @@ jQuery(function($) {
       listSetlist(data);
     });
   }
-  // }
+});
 });
