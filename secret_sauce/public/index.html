@@ -22,6 +22,19 @@
     <title>The Secret Sauce</title>
 </head>
 <body>
+    <!-- Modal Trigger -->
+    <a class="waves-effect waves-light btn modal-trigger" href="#loginModal">Modal</a>
+    
+    <!-- Modal Structure -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h4>Hey You!</h4>
+            <p class="black-text">Please login to your Spotify Account to reJam</p>
+        </div>
+        <div class="modal-footer">
+            <a href="/login" class="modal-action modal-close waves-effect waves-green btn-flat">Login</a>
+        </div>
+    </div>
 <header>
     <div class="container">
         <a href="#!" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons black-text">menu</i></a>
@@ -30,10 +43,14 @@
     <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
         <div class="user-view">
         <div class="background">
-            <div class="songWidget">widget goes here</div>
+            <div class="songWidget">
+                <iframe src="https://open.spotify.com/embed?uri=spotify:user:fyffest2013:playlist:6cOVGhHzKFFVhsfqXqFVwv" width="300"
+                    height="380" frameborder="0" allowtransparency="true"></iframe>
+            </div>
 
         </div>
             <div class="setlist">set list goes appened here</div>
+            <button id="api-button-1">Spotify</button>
         </div>
 
     </ul>
@@ -42,17 +59,19 @@
 <div id="index-banner" class="parallax-container">
         <div class="section no-pad-bot">
             <div class="container">
-                <button class="btn waves-effect waves-light blue spotifyLogin" type="submit" name="action">Login
-                   <!--  <i class="material-icons right">searc</i> -->
-                </button>
                 <h1 class="header center">RE<span class="red-text ion-ios-star"></span>JAM</h1>
                 <div class="row center">
                     <h5 class="header col s12"> Bridging the gap between your ears <span class="ion-headphone"></span> <br> Search for your experience </h5>
                 </div>
                     <div class="other">
                     <div style="margin-top: -15px;" class="input-field row center">
+<<<<<<< HEAD
                         <input style="padding-left: 2rem; background: white" class="input-group" id="search"  type="search" placeholder="Artist, song, venue">
                         <button style="margin-top: -10px;" class="btn waves-effect waves-light black " type="submit" name="action" id="searchButton">Search
+=======
+                        <input style="padding-left: 2rem; background: white" class="input-group" id="artist-search"  type="search" placeholder="Artist">
+                        <button style="margin-top: -10px;" class="btn waves-effect waves-light black" id="search-button" type="submit" name="action">Search
+>>>>>>> a109923d881119a0950d866c79ad67b9d4e054f5
                         <i class="material-icons right">search</i>
                     </button>
                         <!--  <a href="#" id="submit" class="btn-large waves-effect waves-light black">Search</a> -->
@@ -229,7 +248,7 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-    <!-- <script src="js/materialize.js"></script> -->
+    <script src="/assets/javascript/rejam.js"></script>
    <!--  <script src="js/init.js"></script> -->
 <script>
     $(document).ready(function(){
