@@ -146,7 +146,9 @@ footer.page-footer {
  }
  .setlist   {
      margin-left: 15px;
-
+ }
+ .setlist-bg    {
+     background: #4d586b
  }
  .apiDiv {
      text-align: center;
@@ -159,6 +161,18 @@ footer.page-footer {
  }
  @media only screen and (max-width: 590px) {
      .mediaChange {
-         min-height: 200px;
+         min-height: 220px;
      }
+ }
+ @media only screen and (min-width: 591px) {
+     .mediaChange1{
+         margin-top: 30px;
+     }
+     .mediaChange {
+         min-height: 380px;
+     }
+ }
+
+ .star  {
+     color: rebeccapurple;
  }
