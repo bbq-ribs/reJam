@@ -177,24 +177,30 @@ app.get("/search_spotify", function(req, res) {
 
 app.get("/create_spotify_playlist", function(req, res) {
   var access_token = req.query.access_token;
+  var user_id = req.query.user_id;
 
-  console.log("sending create spotify playlist request");
+  console.log("sending request to create spotify playlist");
 
   var options = {
     url:
-      "https://api.spotify.com/v1/search?q=" +
-      searchTerm +
-      "&type=" +
-      searchType,
+      "https://api.spotify.com/v1/users/" +
+      user_id +
+      "/playlists",
     headers: {
-      Authorization: "Bearer " + access_token
+      Authorization: "Bearer " + access_token,
+      'Content-Type': "application/json"
+    },
+    body: {
+      name: "reJam"
     },
     json: true
   };
 
-  request.get(options, function(error, response, body) {
+  console.log(options.url);
+
+  request.post(options, function(error, response, body) {
     console.log(response.statusCode);
-    if (!error && response.statusCode === 200) {
+    if (!error && response.statusCode === 201) {
       console.log("Request Made!");
       res.send(body);
     }

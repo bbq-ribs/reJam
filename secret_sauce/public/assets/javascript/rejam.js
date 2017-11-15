@@ -1,5 +1,10 @@
 jQuery(function($) {
-  
+  //spotify playlist id to update widget
+  var userPlaylistID = "";
+
+  //string used to add songs to spotify playlist
+  var spotifyTrackURIs = null;
+
   //Obtains parameters from the hash of the URL @return Object
   function getHashParams() {
     var hashParams = {};
@@ -24,11 +29,11 @@ jQuery(function($) {
     alert("There was an error during the authentication");
   } else {
     if (access_token) {
-      console.log("Access Granted!")
+      console.log("Access Granted!");
       //valid access token, do nothing
     } else {
       //display spotify login modal
-      console.log("Displaying Login Modal")
+      console.log("Displaying Login Modal");
       $(".modal").modal();
       $("#loginModal").modal("open");
     }
@@ -47,15 +52,34 @@ jQuery(function($) {
     // console.log(myObj);
   });
 
+  $("#api-button-2").on("click", function() {
+    console.log("this works");
+    createSpotifyPlaylist();
+  });
+
   //list setlists obtained from artist search
-  function listSetlist(searchResults){
+  function listSetlist(searchResults) {
     //Q's code goes here
-    console.log("Updating Page w/ Artist Shows")
+    console.log("Updating Page w/ Artist Shows");
+  }
+
+  //create empty spotify playlist
+  function createSpotifyPlaylist() {
+    $.ajax({
+      url: "/create_spotify_playlist",
+      data: {
+        access_token: access_token,
+        user_id: "brandonhoffman"
+      }
+    }).done(function(data) {
+      console.log("Created Playlist!")
+      console.log(data);
+      userPlaylistID = data.uri;
+    });
   }
 
   //setlist <div> clicked, generate playlists w/ songs & refresh widget
-  function generateSpotifyPlaylist(setlistId){
-    
+  function generateSpotifyPlaylist(setlistId) {
   }
 
   //search spotify for string and specified type (artist, album, track)
