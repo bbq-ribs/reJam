@@ -144,9 +144,13 @@ footer.page-footer {
  .foot-change   {
      background-color: white;
  }
- .songWidget    {
-     padding: 15px;
- }
  .setlist   {
-     padding: 15px;
+     margin-left: 15px;
+
+ }
+ .apiDiv {
+     text-align: center;
+ }
+ .btn-space {
+     margin-top: 10px;
  }
