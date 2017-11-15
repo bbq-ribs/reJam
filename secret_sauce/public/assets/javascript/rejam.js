@@ -1,5 +1,10 @@
 
-jQuery(function($) {
+var refinedJSON;
+var setlistResponse;
+var userSearch;
+var vagueJSON;
+var songsArr;
+jQuery(function ($) {
   //spotify playlist id to update widget
   var userPlaylistURI = "";
   var userPlaylistID = "";
@@ -42,13 +47,14 @@ jQuery(function($) {
   }
 
   //seach button clicked, search setlist.fm
-  $("#search-button").on("click", function() {
+  $("#search-button").on("click", function () {
     console.log("Search Clicked");
-    var searchString = $("#artist-search").val();
-    searchSetlist(searchString);
+    var queryString = $("#artist-search").val();
+    console.log(queryString);
+    vagueJSON = searchSetlist(queryString);
   });
 
-  $("#api-button-1").on("click", function() {
+  $("#api-button-1").on("click", function () {
     console.log("this works");
     var myObj = searchSpotify("radiohead+videotape", "track");
     // console.log(myObj);
@@ -73,73 +79,63 @@ jQuery(function($) {
     false
   );
 
-  var refinedJSON;
-  var setlistResponse;
-  var userSearch;
-  var vagueJSON;
-  var songsArr;
-
-  var testvarforchanges;
-  //create an on click function for the searchButton
-  $("searchButton").on("click", function () {
-    //grabs the users search query
-    userSearch = $("#search").text().val();
-    // console.log(userSearch);
-    //sets the setListsObj to equal the json object
-    vagueJSON = searchSetlist(userSearch);
-    //sends the json obj to showAndCreateDivs which is going to print them out for the user to see
-    showAndCreateDivs(vagueJSON, false);
-  });
 
   //uses a boolean that way it can tell whether if it is the original json object or the refined one.
-  function showAndCreateDivs(obj, isSongs) {
-    for (var i = 0; i < obj.setlist.length; i++) {
-      //will only do this if 
-      if (isSongs) {
-        //this will populate the array with the refined json object
-        songsArr.push(obj.setlist[0].sets.set[0].songs[i].name);
-        var b = $("<div><p>" + obj.setlist.sets[0].songs[i].name +"</p></div>");
-        $(b).attr({
-          "idName": "response" + i,
-          "idHash": obj.setlist[i].venue.id,
-          "class": "aReponse"
-        });
-
-        //display the reponse's venue city and date for all the results
-      } else {
-        var a = $("<div><p>" + obj.setlist[i].venue + " " + obj.setlist[i].venue.city.name + "," + obj.setlist[i].venue.city.stateCode + " " + obj.setlist[i].eventDate + " " + obj.setlist[i].id + "</p></div>")
-        $(a).attr({
-          "idName": "response" + i,
-          "idHash": obj.setlist[i].venue.id,
-          "class": "aReponse"
-        });
-      }
-    }
-  }
 
   //waits for any of the divs that were just created to be clicked
   $(".aResponse").on("click", function () {
     //going to take the unique hash according to the button that was pressed
-    var id = this.idHash;
+    id = $(this).attr("idHash");
     //sets setListSongs to equal the specific json obj returned from calling the ajax with the hash
     refinedJSON = searchSetlist(id);
     //sends that obj into the showAndCreateDivs func that will also print out the divs this time with the songs.
     showAndCreateDivs(refinedJSON, true);
-  $("#api-button-2").on("click", function() {
+  });
+
+  $("#api-button-2").on("click", function () {
     console.log("this works");
     createSpotifyPlaylist();
   });
 
-  $("#api-button-3").on("click", function() {
+  $(".aSong").on("click", function () {
+
+  });
+
+  $("#api-button-3").on("click", function () {
     console.log("this works");
     generateSpotifyPlaylist();
   });
 
-  //list setlists obtained from artist search
-  function listSetlist(searchResults) {
-    //Q's code goes here
-    console.log("Updating Page w/ Artist Shows");
+  function listSetlistRefined(obj, isSongs) {
+    for (var i = 0; i < obj.setlist.length; i++) {
+      //will only do this if 
+      //this will populate the array with the refined json object
+      $(".setlist").clear();
+      songsArr.push(obj.setlist[0].sets.set[0].songs[i].name);
+      var b = $("<div><p>" + obj.setlist.sets[0].songs[i].name + "</p></div>");
+      $(b).attr({
+        "idName": "songResponse" + i,
+        "idHash": obj.setlist[i].id,
+        "class": "aSong"
+      });
+    }
   }
+
+  //list setlists obtained from artist search
+  function listSetlist(obj) {
+    console.log("in list setlist");
+    console.log(obj.setlist[0].sets.set[0].song[0].name);
+    //display the reponse's venue city and date for all the results
+    for (var i = 0; i < 20; i++) {
+      var a = $("<div><p>" + obj.setlist[i].venue.name + "</p></div>");
+      $(a).attr("name", i);
+      $(a).attr("idHash", obj.setlist[i].id);
+      console.log(a);
+      $(a).appendTo(".setlist");
+      console.log("Updating Page w/ Artist Shows");
+    }
+  }
+
 
   //create empty spotify playlist
   function createSpotifyPlaylist() {
@@ -149,7 +145,7 @@ jQuery(function($) {
         access_token: access_token,
         user_id: "brandonhoffman"
       }
-    }).done(function(data) {
+    }).done(function (data) {
       console.log("Created Playlist!")
       console.log(data);
       userPlaylistURI = data.uri;
@@ -167,7 +163,7 @@ jQuery(function($) {
         playlist_id: userPlaylistID,
         track_id: spotifyTrackURIs
       }
-    }).done(function() {
+    }).done(function () {
       console.log("Updated Playlist!")
     });
   }
@@ -199,5 +195,4 @@ jQuery(function($) {
       listSetlist(data);
     });
   }
-});
 });
