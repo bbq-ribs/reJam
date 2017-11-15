@@ -122,7 +122,6 @@ jQuery(function($) {
     showAndCreateDivs(refinedJSON, true);
   });
 
-=======
   //list setlists obtained from artist search
   function listSetlist(searchResults){
     //Q's code goes here
@@ -135,7 +134,6 @@ jQuery(function($) {
   }
 
   //search spotify for string and specified type (artist, album, track)
->>>>>>> a109923d881119a0950d866c79ad67b9d4e054f5
   function searchSpotify(searchString, searchType) {
     $.ajax({
       url: "/search_spotify",
