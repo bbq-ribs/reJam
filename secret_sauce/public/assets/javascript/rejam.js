@@ -1,8 +1,6 @@
 jQuery(function($) {
-  /**
-       * Obtains parameters from the hash of the URL
-       * @return Object
-       */
+  
+  //Obtains parameters from the hash of the URL @return Object
   function getHashParams() {
     var hashParams = {};
     var e,
@@ -14,107 +12,53 @@ jQuery(function($) {
     return hashParams;
   }
 
-  // var userProfileSource = document.getElementById("user-profile-template")
-  //     .innerHTML,
-  //   userProfileTemplate = Handlebars.compile(userProfileSource),
-  //   userProfilePlaceholder = document.getElementById("user-profile");
-
-  // var oauthSource = document.getElementById("oauth-template").innerHTML,
-  //   oauthTemplate = Handlebars.compile(oauthSource),
-  //   oauthPlaceholder = document.getElementById("oauth");
-
   var params = getHashParams();
 
+  //set spotify access_token & refresh_token
   var access_token = params.access_token,
     refresh_token = params.refresh_token,
     error = params.error;
 
-  // if (error) {
-  //   alert("There was an error during the authentication");
-  // } else {
-  //   if (access_token) {
-  //     // render oauth info
-  //     // oauthPlaceholder.innerHTML = oauthTemplate({
-  //     //   access_token: access_token,
-  //     //   refresh_token: refresh_token
-  //     });
+  //check for spotify access_token, display login modal if needed
+  if (error) {
+    alert("There was an error during the authentication");
+  } else {
+    if (access_token) {
+      console.log("Access Granted!")
+      //valid access token, do nothing
+    } else {
+      //display spotify login modal
+      console.log("Displaying Login Modal")
+      $(".modal").modal();
+      $("#loginModal").modal("open");
+    }
+  }
 
-  //     $.ajax({
-  //       url: "https://api.spotify.com/v1/me",
-  //       headers: {
-  //         Authorization: "Bearer " + access_token
-  //       },
-  //       success: function(response) {
-  //         userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+  //seach button clicked, search setlist.fm
+  $("#search-button").on("click", function() {
+    console.log("Search Clicked");
+    var searchString = $("#artist-search").val();
+    searchSetlist(searchString);
+  });
 
-  //         $("#login").hide();
-  //         $("#loggedin").show();
-  //       }
-  //     });
-  //   } else {
-  //     // render initial screen
-  //     $("#login").show();
-  //     $("#loggedin").hide();
-  //   }
+  $("#api-button-1").on("click", function() {
+    console.log("this works");
+    var myObj = searchSpotify("radiohead+videotape", "track");
+    // console.log(myObj);
+  });
 
-  // document.getElementById("obtain-new-token").addEventListener(
-  //   "click",
-  //   function() {
-  //     $.ajax({
-  //       url: "/refresh_token",
-  //       data: {
-  //         refresh_token: refresh_token
-  //       }
-  //     }).done(function(data) {
-  //       access_token = data.access_token;
-  //       oauthPlaceholder.innerHTML = oauthTemplate({
-  //         access_token: access_token,
-  //         refresh_token: refresh_token
-  //       });
-  //     });
-  //   },
-  //   false
-  // );
+  //list setlists obtained from artist search
+  function listSetlist(searchResults){
+    //Q's code goes here
+    console.log("Updating Page w/ Artist Shows")
+  }
 
-  // document.getElementById("check-album-search").addEventListener(
-  //   "click",
-  //   function() {
-  //     $.ajax({
-  //       url: "https://api.spotify.com/v1/search",
-  //       headers: {
-  //         Accept: "application / json",
-  //         Authorization: "Bearer " + access_token
-  //       },
-  //       data: {
-  //         q: "muse+absolution",
-  //         type: "album"
-  //       }
-  //     }).done(function(data) {
-  //       console.log(data);
-  //     });
-  //   },
-  //   false
-  // );
+  //setlist <div> clicked, generate playlists w/ songs & refresh widget
+  function generateSpotifyPlaylist(setlistId){
+    
+  }
 
-  document.getElementById("api-button-1").addEventListener(
-    "click",
-    function() {
-      console.log("this works");
-      var myObj = searchSpotify("radiohead+videotape", "track");
-      // console.log(myObj);
-    },
-    false
-  );
-
-  document.getElementById("api-button-2").addEventListener(
-    "click",
-    function() {
-      var myObj = searchSetlist("radiohead");
-      // console.log(myObj);
-    },
-    false
-  );
-
+  //search spotify for string and specified type (artist, album, track)
   function searchSpotify(searchString, searchType) {
     $.ajax({
       url: "/search_spotify",
@@ -129,6 +73,7 @@ jQuery(function($) {
     });
   }
 
+  //search setlist.fm for setlist and call listSetlist with the results
   function searchSetlist(searchString) {
     $.ajax({
       url: "/search_setlist",
@@ -138,7 +83,6 @@ jQuery(function($) {
     }).done(function(data) {
       console.log(data);
       listSetlist(data);
-      // return data;
     });
   }
   // }
