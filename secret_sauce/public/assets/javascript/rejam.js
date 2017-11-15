@@ -96,7 +96,12 @@ jQuery(function($) {
       if (isSongs) {
         //this will populate the array with the refined json object
         songsArr.push(obj.setlist[0].sets.set[0].songs[i].name);
-
+        var b = $("<div><p>" + obj.setlist.sets[0].songs[i].name +"</p></div>");
+        $(b).attr({
+          "idName": "response" + i,
+          "idHash": obj.setlist[i].venue.id,
+          "class": "aReponse"
+        });
 
         //display the reponse's venue city and date for all the results
       } else {
