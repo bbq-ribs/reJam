@@ -1,16 +1,17 @@
-
-var refinedJSON;
-var setlistResponse;
-var userSearch;
-var vagueJSON;
-var songsArr;
 jQuery(function ($) {
   //spotify playlist id to update widget
   var userPlaylistURI = "";
   var userPlaylistID = "";
+  var userSpotifyID = "";
+  var refinedJSON;
+  var setlistResponse;
+  var userSearch;
+  var vagueJSON;
+  var songsArr;
 
   //array of strings used to add songs to spotify playlist
-  var spotifyTrackURIs = "spotify:track:4iV5W9uYEdYUVa79Axb7Rh,spotify:track:1301WleyT98MSxVHPZCA6M";
+  var spotifyTrackURIs =
+    "spotify:track:4iV5W9uYEdYUVa79Axb7Rh,spotify:track:1301WleyT98MSxVHPZCA6M";
 
   //Obtains parameters from the hash of the URL @return Object
   function getHashParams() {
@@ -37,7 +38,8 @@ jQuery(function ($) {
   } else {
     if (access_token) {
       console.log("Access Granted!");
-      //valid access token, do nothing
+      //valid access token, get spotify user id
+      getSpotifyUserInfo();
     } else {
       //display spotify login modal
       console.log("Displaying Login Modal");
@@ -54,32 +56,6 @@ jQuery(function ($) {
     vagueJSON = searchSetlist(queryString);
   });
 
-  $("#api-button-1").on("click", function () {
-    console.log("this works");
-    var myObj = searchSpotify("radiohead+videotape", "track");
-    // console.log(myObj);
-  });
-
-  document.getElementById("api-button-1").addEventListener(
-    "click",
-    function () {
-      console.log("this works");
-      var myObj = searchSpotify("radiohead+videotape", "track");
-      // console.log(myObj);
-    },
-    false
-  );
-
-  document.getElementById("api-button-2").addEventListener(
-    "click",
-    function () {
-      var myObj = searchSetlist("radiohead");
-      // console.log(myObj);
-    },
-    false
-  );
-
-
   //uses a boolean that way it can tell whether if it is the original json object or the refined one.
 
   //waits for any of the divs that were just created to be clicked
@@ -90,6 +66,12 @@ jQuery(function ($) {
     refinedJSON = searchSetlist(id);
     //sends that obj into the showAndCreateDivs func that will also print out the divs this time with the songs.
     showAndCreateDivs(refinedJSON, true);
+  });
+  
+  $("#api-button-1").on("click", function () {
+    console.log("this works");
+    var myObj = searchSpotify("radiohead+videotape", "track");
+    // console.log(myObj);
   });
 
   $("#api-button-2").on("click", function () {
@@ -104,6 +86,17 @@ jQuery(function ($) {
   $("#api-button-3").on("click", function () {
     console.log("this works");
     generateSpotifyPlaylist();
+  });
+  
+  $("#api-button-4").on("click", function() {
+    console.log("this works");
+    getSpotifyUserInfo();
+  });
+
+  $("#api-button-5").on("click", function() {
+    console.log("this works");
+    var searchString = "33e378e1";
+    getSetlist(searchString);
   });
 
   function listSetlistRefined(obj, isSongs) {
@@ -136,6 +129,18 @@ jQuery(function ($) {
     }
   }
 
+  //get user info from spotify and set global var
+  function getSpotifyUserInfo() {
+    $.ajax({
+      url: "/get_spotify_user_info",
+      data: {
+        access_token: access_token
+      }
+    }).done(function(data) {
+      console.log(data);
+      userSpotifyID = data.id;
+    });
+  }
 
   //create empty spotify playlist
   function createSpotifyPlaylist() {
@@ -143,10 +148,10 @@ jQuery(function ($) {
       url: "/create_spotify_playlist",
       data: {
         access_token: access_token,
-        user_id: "brandonhoffman"
+        user_id: userSpotifyID
       }
-    }).done(function (data) {
-      console.log("Created Playlist!")
+    }).done(function(data) {
+      console.log("Created Playlist!");
       console.log(data);
       userPlaylistURI = data.uri;
       userPlaylistID = data.id;
@@ -159,12 +164,12 @@ jQuery(function ($) {
       url: "/update_spotify_playlist",
       data: {
         access_token: access_token,
-        user_id: "brandonhoffman",
+        user_id: userSpotifyID,
         playlist_id: userPlaylistID,
         track_id: spotifyTrackURIs
       }
-    }).done(function () {
-      console.log("Updated Playlist!")
+    }).done(function() {
+      console.log("Updated Playlist!");
     });
   }
 
@@ -193,6 +198,19 @@ jQuery(function ($) {
     }).done(function (data) {
       console.log(data);
       listSetlist(data);
+    });
+  }
+
+  //get setlist info from setlist.fm
+  function getSetlist(searchString) {
+    $.ajax({
+      url: "/get_setlist",
+      data: {
+        setlistID: searchString
+      }
+    }).done(function(data) {
+      console.log(data);
+      // listSetlist(data);
     });
   }
 });

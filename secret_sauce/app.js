@@ -152,6 +152,26 @@ app.get("/refresh_token", function(req, res) {
   });
 });
 
+app.get("/get_spotify_user_info", function(req, res) {
+  var access_token = req.query.access_token;
+
+  console.log("requesting spotify user info");
+
+  var options = {
+    url: "https://api.spotify.com/v1/me",
+    headers: { Authorization: "Bearer " + access_token },
+    json: true
+  };
+
+  request.get(options, function(error, response, body) {
+    console.log(response.statusCode);
+    if (!error && response.statusCode === 200) {
+      console.log("Request Made!");
+      res.send(body);
+    }
+  });
+});
+
 app.get("/search_spotify", function(req, res) {
   var searchTerm = req.query.q;
   var searchType = req.query.type;
@@ -226,7 +246,8 @@ app.get("/update_spotify_playlist", function(req, res) {
       user_id +
       "/playlists/" +
       playlist_id +
-      "/tracks?uris=" + track_id,
+      "/tracks?uris=" +
+      track_id,
     headers: {
       Authorization: "Bearer " + access_token
       // "Content-Type": "application/json"
@@ -262,6 +283,31 @@ app.get("/search_setlist", function(req, res) {
       "x-api-key": "a00dce36-dd8d-4962-9ebd-c4234b60e0f5"
     }
   };
+
+  request.get(options, function(error, response, body) {
+    console.log(response.statusCode);
+    if (!error && response.statusCode === 200) {
+      var info = JSON.parse(body);
+      console.log("Request Made!");
+      res.send(info);
+    }
+  });
+});
+
+app.get("/get_setlist", function(req, res) {
+  var setlistID = req.query.setlistID;
+
+  console.log("sending setlist.fm setlist request");
+
+  var options = {
+    url: "https://api.setlist.fm/rest/1.0/setlist/" + setlistID,
+    headers: {
+      Accept: "application/json",
+      "x-api-key": "a00dce36-dd8d-4962-9ebd-c4234b60e0f5"
+    }
+  };
+
+  console.log(options.url);
 
   request.get(options, function(error, response, body) {
     console.log(response.statusCode);
