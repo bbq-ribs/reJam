@@ -2,9 +2,11 @@ jQuery(function($) {
   //spotify playlist id to update widget
   var userPlaylistURI = "";
   var userPlaylistID = "";
+  var userSpotifyID = "";
 
   //array of strings used to add songs to spotify playlist
-  var spotifyTrackURIs = "spotify:track:4iV5W9uYEdYUVa79Axb7Rh,spotify:track:1301WleyT98MSxVHPZCA6M";
+  var spotifyTrackURIs =
+    "spotify:track:4iV5W9uYEdYUVa79Axb7Rh,spotify:track:1301WleyT98MSxVHPZCA6M";
 
   //Obtains parameters from the hash of the URL @return Object
   function getHashParams() {
@@ -31,7 +33,8 @@ jQuery(function($) {
   } else {
     if (access_token) {
       console.log("Access Granted!");
-      //valid access token, do nothing
+      //valid access token, get spotify user id
+      getSpotifyUserInfo();
     } else {
       //display spotify login modal
       console.log("Displaying Login Modal");
@@ -63,10 +66,34 @@ jQuery(function($) {
     generateSpotifyPlaylist();
   });
 
+  $("#api-button-4").on("click", function() {
+    console.log("this works");
+    getSpotifyUserInfo();
+  });
+
+  $("#api-button-5").on("click", function() {
+    console.log("this works");
+    var searchString = "33e378e1";
+    getSetlist(searchString);
+  });
+
   //list setlists obtained from artist search
   function listSetlist(searchResults) {
     //Q's code goes here
     console.log("Updating Page w/ Artist Shows");
+  }
+
+  //get user info from spotify and set global var
+  function getSpotifyUserInfo() {
+    $.ajax({
+      url: "/get_spotify_user_info",
+      data: {
+        access_token: access_token
+      }
+    }).done(function(data) {
+      console.log(data);
+      userSpotifyID = data.id;
+    });
   }
 
   //create empty spotify playlist
@@ -75,10 +102,10 @@ jQuery(function($) {
       url: "/create_spotify_playlist",
       data: {
         access_token: access_token,
-        user_id: "brandonhoffman"
+        user_id: userSpotifyID
       }
     }).done(function(data) {
-      console.log("Created Playlist!")
+      console.log("Created Playlist!");
       console.log(data);
       userPlaylistURI = data.uri;
       userPlaylistID = data.id;
@@ -91,12 +118,12 @@ jQuery(function($) {
       url: "/update_spotify_playlist",
       data: {
         access_token: access_token,
-        user_id: "brandonhoffman",
+        user_id: userSpotifyID,
         playlist_id: userPlaylistID,
         track_id: spotifyTrackURIs
       }
     }).done(function() {
-      console.log("Updated Playlist!")
+      console.log("Updated Playlist!");
     });
   }
 
@@ -125,6 +152,19 @@ jQuery(function($) {
     }).done(function(data) {
       console.log(data);
       listSetlist(data);
+    });
+  }
+
+  //get setlist info from setlist.fm
+  function getSetlist(searchString) {
+    $.ajax({
+      url: "/get_setlist",
+      data: {
+        setlistID: searchString
+      }
+    }).done(function(data) {
+      console.log(data);
+      // listSetlist(data);
     });
   }
   // }
