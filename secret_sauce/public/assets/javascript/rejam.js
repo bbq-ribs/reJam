@@ -78,6 +78,8 @@ jQuery(function($) {
   var userSearch;
   var vagueJSON;
   var songsArr;
+
+  var testvarforchanges;
   //create an on click function for the searchButton
   $("searchButton").on("click", function () {
     //grabs the users search query
