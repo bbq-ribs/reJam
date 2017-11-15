@@ -154,3 +154,11 @@ footer.page-footer {
  .btn-space {
      margin-top: 10px;
  }
+ .vid-clip  {
+     width: 100%;
+ }
+ @media only screen and (max-width: 590px) {
+     .mediaChange {
+         min-height: 200px;
+     }
+ }
