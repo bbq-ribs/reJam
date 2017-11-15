@@ -71,6 +71,12 @@ jQuery(function($) {
     getSpotifyUserInfo();
   });
 
+  $("#api-button-5").on("click", function() {
+    console.log("this works");
+    var searchString = "33e378e1";
+    getSetlist(searchString);
+  });
+
   //list setlists obtained from artist search
   function listSetlist(searchResults) {
     //Q's code goes here
@@ -146,6 +152,19 @@ jQuery(function($) {
     }).done(function(data) {
       console.log(data);
       listSetlist(data);
+    });
+  }
+
+  //get setlist info from setlist.fm
+  function getSetlist(searchString) {
+    $.ajax({
+      url: "/get_setlist",
+      data: {
+        setlistID: searchString
+      }
+    }).done(function(data) {
+      console.log(data);
+      // listSetlist(data);
     });
   }
   // }

@@ -294,6 +294,31 @@ app.get("/search_setlist", function(req, res) {
   });
 });
 
+app.get("/get_setlist", function(req, res) {
+  var setlistID = req.query.setlistID;
+
+  console.log("sending setlist.fm setlist request");
+
+  var options = {
+    url: "https://api.setlist.fm/rest/1.0/setlist/" + setlistID,
+    headers: {
+      Accept: "application/json",
+      "x-api-key": "a00dce36-dd8d-4962-9ebd-c4234b60e0f5"
+    }
+  };
+
+  console.log(options.url);
+
+  request.get(options, function(error, response, body) {
+    console.log(response.statusCode);
+    if (!error && response.statusCode === 200) {
+      var info = JSON.parse(body);
+      console.log("Request Made!");
+      res.send(info);
+    }
+  });
+});
+
 console.log("Listening on 8888");
 var port = process.env.port || 8888;
 app.listen(port);
