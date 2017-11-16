@@ -95,11 +95,19 @@ jQuery(function($) {
 
   //-q created this as new function this listens for the venue divs to be clicked
 
-  $(document).on("click", ".aSetList", function(){
+  $(document).on("click", ".aSetList", function() {
     $(".setlist").empty();
     var indexOfSetlist = $(this).attr("name");
-    for( var c = 0; c < vagueJSON.setlist[indexOfSetlist].sets.set[0].song.length; c++ ){
-      var a = $("<div>" + vagueJSON.setlist[indexOfSetlist].sets.set[0].song[c].name + "</div>");
+    for (
+      var c = 0;
+      c < vagueJSON.setlist[indexOfSetlist].sets.set[0].song.length;
+      c++
+    ) {
+      var a = $(
+        "<div>" +
+          vagueJSON.setlist[indexOfSetlist].sets.set[0].song[c].name +
+          "</div>"
+      );
       $(a).appendTo(".setlist");
     }
     var setlistID = $(this).attr("idHash");
@@ -114,50 +122,55 @@ jQuery(function($) {
 
   //list setlists obtained from artist search
   function listSetlist(obj) {
-      // console.log(obj);
-      console.log("in list setlist");
-      $("#setListSection").empty();
-      var a = $("<div><h3><b>" + obj.setlist[0].artist.name + "</div>");
-      $(a).attr("name", obj.setlist[0].artist.name );
-      console.log(a);
-      $(a).appendTo(".artist");
-  
-      // console.log(obj.setlist[0].sets.set[0].song[0].name);
-      //display the reponse's venue city and date for all the results
-      for (var i = 0; i < 20; i++) {
-        console.log("iteration " + i);
-        if(obj.setlist[i].sets.set.length > 0){
-          console.log("length of song array" + obj.setlist[i].sets.set[0].song.length);
-          var b = $("<div>" + obj.setlist[i].venue.name + "</div>");
-          $(b).attr("name", i);
-          $(b).attr("idHash", obj.setlist[i].id);
-          $(b).addClass("aSetList");
-          $(b).attr("setListLength", obj.setlist[i].sets.set[0].song.length);
-          console.log($(b).attr("setListLength"));
-          console.log(b);
-          $(b).appendTo(".venue");
-          console.log("Updating Page w/ Artist Shows");
-    
-          var c = $("<div>" + obj.setlist[i].venue.city.state + "</div>");
-          $(c).attr("name", i);
-          $(c).attr("idHash", obj.setlist[i].id);
-          $(c).addClass("aSetList");
-          $(c).attr("setListLength", obj.setlist[i].sets.set[0].song.length);
-          console.log($(c).attr("setListLength"));
-          console.log(c);
-          $(c).appendTo(".city");
-    
-          var d = $("<div>" + obj.setlist[i].eventDate + "</div>");
-          $(d).attr("name", i);
-          $(d).attr("idHash", obj.setlist[i].id);
-          $(d).addClass("aSetList");
-          $(d).attr("setListLength", obj.setlist[i].sets.set[0].song.length);
-          console.log($(d).attr("setListLength"));
-          console.log(d);
-          $(d).appendTo(".date");
-        }
+    // console.log(obj);
+    console.log("in list setlist");
+    $(".artist").empty();
+    $(".venue").empty();
+    $(".city").empty();
+    $(".date").empty();
+    var a = $("<div><h3><b>" + obj.setlist[0].artist.name + "</div>");
+    $(a).attr("name", obj.setlist[0].artist.name);
+    console.log(a);
+    $(a).appendTo(".artist");
+
+    // console.log(obj.setlist[0].sets.set[0].song[0].name);
+    //display the reponse's venue city and date for all the results
+    for (var i = 0; i < 20; i++) {
+      console.log("iteration " + i);
+      if (obj.setlist[i].sets.set.length > 0) {
+        console.log(
+          "length of song array" + obj.setlist[i].sets.set[0].song.length
+        );
+        var b = $("<div>" + obj.setlist[i].venue.name + "</div>");
+        $(b).attr("name", i);
+        $(b).attr("idHash", obj.setlist[i].id);
+        $(b).addClass("aSetList");
+        $(b).attr("setListLength", obj.setlist[i].sets.set[0].song.length);
+        console.log($(b).attr("setListLength"));
+        console.log(b);
+        $(b).appendTo(".venue");
+        console.log("Updating Page w/ Artist Shows");
+
+        var c = $("<div>" + obj.setlist[i].venue.city.state + "</div>");
+        $(c).attr("name", i);
+        $(c).attr("idHash", obj.setlist[i].id);
+        $(c).addClass("aSetList");
+        $(c).attr("setListLength", obj.setlist[i].sets.set[0].song.length);
+        console.log($(c).attr("setListLength"));
+        console.log(c);
+        $(c).appendTo(".city");
+
+        var d = $("<div>" + obj.setlist[i].eventDate + "</div>");
+        $(d).attr("name", i);
+        $(d).attr("idHash", obj.setlist[i].id);
+        $(d).addClass("aSetList");
+        $(d).attr("setListLength", obj.setlist[i].sets.set[0].song.length);
+        console.log($(d).attr("setListLength"));
+        console.log(d);
+        $(d).appendTo(".date");
       }
     }
+  }
 
   //get user info from spotify and set global var
   function getSpotifyUserInfo() {
@@ -211,7 +224,11 @@ jQuery(function($) {
   function updateSpotifyWidget() {
     console.log("Updating Spotify Widget");
     $(".songWidget").empty();
-    $(".songWidget").html("<iframe src='https://open.spotify.com/embed?uri=" + userPlaylistURI + "' width='300' height='380' frameborder='0' allowtransparency='true'></iframe>");
+    $(".songWidget").html(
+      "<iframe src='https://open.spotify.com/embed?uri=" +
+        userPlaylistURI +
+        "' width='300' height='380' frameborder='0' allowtransparency='true'></iframe>"
+    );
   }
 
   //search spotify for string and specified type (artist, album, track)
@@ -268,9 +285,13 @@ jQuery(function($) {
         }).done(function(data) {
           console.log(data);
           if (spotifyTrackURIs != "") {
-            spotifyTrackURIs += "," + data.tracks.items[0].uri;
+            if (data.tracks.items.length > 0) {
+              spotifyTrackURIs += "," + data.tracks.items[0].uri;
+            }
           } else {
-            spotifyTrackURIs = data.tracks.items[0].uri;
+            if (data.tracks.items.length > 0) {
+              spotifyTrackURIs = data.tracks.items[0].uri;
+            }
           }
           console.log(spotifyTrackURIs);
           counter++;
