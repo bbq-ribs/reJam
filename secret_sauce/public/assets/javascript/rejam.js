@@ -1,3 +1,13 @@
+var refinedJSON;
+var setlistResponse;
+var userSearch;
+var vagueJSON;
+var songsArr;
+
+//-q created the var o, later is set to the obj needed it global for the way that i got the setlist info
+
+
+var o;
 jQuery(function($) {
   //spotify playlist id to update widget
   var userPlaylistURI = "";
@@ -95,18 +105,30 @@ jQuery(function($) {
     searchSetlist(searchString);
   });
 
+  //-q created this as new function this listens for the venue divs to be clicked
+
+  $(document).on("click", ".aSetList", function(){
+    $(".setlist").empty();
+    var indexOfSetlist = $(this).attr("name");
+    for( var c = 0; c < o.setlist[indexOfSetlist].sets.set[0].song.length; c++ ){
+      var a = $("<div>" + o.setlist[indexOfSetlist].sets.set[0].song[c].name + "</div>");
+      $(a).appendTo(".setlist");
+    }
+  });
+
   $("#api-button-6").on("click", function() {
     console.log("Setlist Selected");
     var searchString = "23f8b003";
     getSetlist(searchString);
   });
+//-q there was a function here that didn't do anything so i just got rid of it, thought is was going to use it but didn't end up using it
 
-  $(".aSong").on("click", function() {
-    //possible function
-  });
+
 
   //gereate the spoitfy playlist
   //use class setlist for ul
+
+  //-q dont use this function so i don't need it idk about ur code
   function listSetlistRefined(obj, isSongs) {
     for (var i = 0; i < obj.setlist.length; i++) {
       //will only do this if
@@ -124,18 +146,50 @@ jQuery(function($) {
 
   //list setlists obtained from artist search
   function listSetlist(obj) {
-    console.log("in list setlist");
-    console.log(obj.setlist[0].sets.set[0].song[0].name);
-    //display the reponse's venue city and date for all the results
-    for (var i = 0; i < 20; i++) {
-      var a = $("<div><p>" + obj.setlist[i].venue.name + "</p></div>");
-      $(a).attr("name", i);
-      $(a).attr("idHash", obj.setlist[i].id);
+      // console.log(obj);
+      console.log("in list setlist");
+      $("#setListSection").empty();
+      var a = $("<div><h3><b>" + obj.setlist[0].artist.name + "</div>");
+      $(a).attr("name", obj.setlist[0].artist.name );
       console.log(a);
-      $(a).appendTo(".setlist");
-      console.log("Updating Page w/ Artist Shows");
+      $(a).appendTo(".artist");
+  
+      // console.log(obj.setlist[0].sets.set[0].song[0].name);
+      //display the reponse's venue city and date for all the results
+      for (var i = 0; i < 20; i++) {
+        console.log("iteration " + i);
+        if(obj.setlist[i].sets.set[0].song !== null ){
+          console.log("length of song array" + obj.setlist[i].sets.set[0].song.length);
+          var b = $("<div>" + obj.setlist[i].venue.name + "</div>");
+          $(b).attr("name", i);
+          $(b).attr("idHash", obj.setlist[i].id);
+          $(b).addClass("aSetList");
+          $(b).attr("setListLength", obj.setlist[i].sets.set[0].song.length);
+          console.log($(b).attr("setListLength"));
+          console.log(b);
+          $(b).appendTo(".venue");
+          console.log("Updating Page w/ Artist Shows");
+    
+          var c = $("<div>" + obj.setlist[i].venue.city.state + "</div>");
+          $(c).attr("name", i);
+          $(c).attr("idHash", obj.setlist[i].id);
+          $(c).addClass("aSetList");
+          $(c).attr("setListLength", obj.setlist[i].sets.set[0].song.length);
+          console.log($(c).attr("setListLength"));
+          console.log(c);
+          $(c).appendTo(".city");
+    
+          var d = $("<div>" + obj.setlist[i].eventDate + "</div>");
+          $(d).attr("name", i);
+          $(d).attr("idHash", obj.setlist[i].id);
+          $(d).addClass("aSetList");
+          $(d).attr("setListLength", obj.setlist[i].sets.set[0].song.length);
+          console.log($(d).attr("setListLength"));
+          console.log(d);
+          $(d).appendTo(".date");
+        }
+      }
     }
-  }
 
   //get user info from spotify and set global var
   function getSpotifyUserInfo() {
@@ -216,6 +270,7 @@ jQuery(function($) {
       }
     }).done(function(data) {
       vagueJSON = data;
+      0 = data;
       console.log(vagueJSON);
     });
   }
