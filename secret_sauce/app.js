@@ -263,8 +263,8 @@ app.get("/update_spotify_playlist", function(req, res) {
       !error &&
       (response.statusCode === 200 || response.statusCode === 201)
     ) {
-      console.log("Request Made!");
-      // res.send(body);
+      console.log("Playlist Updated!");
+      res.send(response);
     }
   });
 });
