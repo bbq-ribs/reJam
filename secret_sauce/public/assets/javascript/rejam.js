@@ -1,13 +1,3 @@
-var refinedJSON;
-var setlistResponse;
-var userSearch;
-var vagueJSON;
-var songsArr;
-
-//-q created the var o, later is set to the obj needed it global for the way that i got the setlist info
-
-
-var o;
 jQuery(function($) {
   //spotify playlist id to update widget
   var userPlaylistURI = "";
@@ -66,8 +56,6 @@ jQuery(function($) {
     searchSetlist(queryString);
   });
 
-  //uses a boolean that way it can tell whether if it is the original json object or the refined one.
-
   //waits for any of the divs that were just created to be clicked
   $(".aResponse").on("click", function() {
     //going to take the unique hash according to the button that was pressed
@@ -110,10 +98,12 @@ jQuery(function($) {
   $(document).on("click", ".aSetList", function(){
     $(".setlist").empty();
     var indexOfSetlist = $(this).attr("name");
-    for( var c = 0; c < o.setlist[indexOfSetlist].sets.set[0].song.length; c++ ){
-      var a = $("<div>" + o.setlist[indexOfSetlist].sets.set[0].song[c].name + "</div>");
+    for( var c = 0; c < vagueJSON.setlist[indexOfSetlist].sets.set[0].song.length; c++ ){
+      var a = $("<div>" + vagueJSON.setlist[indexOfSetlist].sets.set[0].song[c].name + "</div>");
       $(a).appendTo(".setlist");
     }
+    var setlistID = $(this).attr("idHash");
+    getSetlist(setlistID);
   });
 
   $("#api-button-6").on("click", function() {
@@ -121,28 +111,6 @@ jQuery(function($) {
     var searchString = "23f8b003";
     getSetlist(searchString);
   });
-//-q there was a function here that didn't do anything so i just got rid of it, thought is was going to use it but didn't end up using it
-
-
-
-  //gereate the spoitfy playlist
-  //use class setlist for ul
-
-  //-q dont use this function so i don't need it idk about ur code
-  function listSetlistRefined(obj, isSongs) {
-    for (var i = 0; i < obj.setlist.length; i++) {
-      //will only do this if
-      //this will populate the array with the refined json object
-      $(".setlist").clear();
-      songsArr.push(obj.setlist[0].sets.set[0].songs[i].name);
-      var b = $("<div><p>" + obj.setlist.sets[0].songs[i].name + "</p></div>");
-      $(b).attr({
-        idName: "songResponse" + i,
-        idHash: obj.setlist[i].id,
-        class: "aSong"
-      });
-    }
-  }
 
   //list setlists obtained from artist search
   function listSetlist(obj) {
@@ -158,7 +126,7 @@ jQuery(function($) {
       //display the reponse's venue city and date for all the results
       for (var i = 0; i < 20; i++) {
         console.log("iteration " + i);
-        if(obj.setlist[i].sets.set[0].song !== null ){
+        if(obj.setlist[i].sets.set.length > 0){
           console.log("length of song array" + obj.setlist[i].sets.set[0].song.length);
           var b = $("<div>" + obj.setlist[i].venue.name + "</div>");
           $(b).attr("name", i);
@@ -270,8 +238,9 @@ jQuery(function($) {
       }
     }).done(function(data) {
       vagueJSON = data;
-      0 = data;
+      // 0 = data;
       console.log(vagueJSON);
+      listSetlist(vagueJSON);
     });
   }
 
