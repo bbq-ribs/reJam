@@ -319,6 +319,6 @@ app.get("/get_setlist", function(req, res) {
   });
 });
 
-console.log("Listening on 8888");
 var port = process.env.port || 8888;
 app.listen(port);
+console.log(port);
