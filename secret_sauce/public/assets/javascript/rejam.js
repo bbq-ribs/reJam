@@ -1,17 +1,17 @@
-jQuery(function ($) {
+jQuery(function($) {
   //spotify playlist id to update widget
   var userPlaylistURI = "";
   var userPlaylistID = "";
   var userSpotifyID = "";
+
+  //setlist from setlist.fm
   var refinedJSON;
-  var setlistResponse;
-  var userSearch;
+
+  //setlist search from setlist.fm
   var vagueJSON;
-  var songsArr;
 
   //array of strings used to add songs to spotify playlist
-  var spotifyTrackURIs =
-    "spotify:track:4iV5W9uYEdYUVa79Axb7Rh,spotify:track:1301WleyT98MSxVHPZCA6M";
+  var spotifyTrackURIs = "";
 
   //Obtains parameters from the hash of the URL @return Object
   function getHashParams() {
@@ -49,17 +49,17 @@ jQuery(function ($) {
   }
 
   //seach button clicked, search setlist.fm
-  $("#search-button").on("click", function () {
+  $("#search-button").on("click", function() {
     console.log("Search Clicked");
     var queryString = $("#artist-search").val();
     console.log(queryString);
-    vagueJSON = searchSetlist(queryString);
+    searchSetlist(queryString);
   });
 
   //uses a boolean that way it can tell whether if it is the original json object or the refined one.
 
   //waits for any of the divs that were just created to be clicked
-  $(".aResponse").on("click", function () {
+  $(".aResponse").on("click", function() {
     //going to take the unique hash according to the button that was pressed
     id = $(this).attr("idHash");
     //sets setListSongs to equal the specific json obj returned from calling the ajax with the hash
@@ -67,27 +67,23 @@ jQuery(function ($) {
     //sends that obj into the showAndCreateDivs func that will also print out the divs this time with the songs.
     showAndCreateDivs(refinedJSON, true);
   });
-  
-  $("#api-button-1").on("click", function () {
+
+  $("#api-button-1").on("click", function() {
     console.log("this works");
     var myObj = searchSpotify("radiohead+videotape", "track");
     // console.log(myObj);
   });
 
-  $("#api-button-2").on("click", function () {
+  $("#api-button-2").on("click", function() {
     console.log("this works");
     createSpotifyPlaylist();
   });
 
-  $(".aSong").on("click", function () {
-
-  });
-
-  $("#api-button-3").on("click", function () {
+  $("#api-button-3").on("click", function() {
     console.log("this works");
     generateSpotifyPlaylist();
   });
-  
+
   $("#api-button-4").on("click", function() {
     console.log("this works");
     getSpotifyUserInfo();
@@ -95,21 +91,33 @@ jQuery(function ($) {
 
   $("#api-button-5").on("click", function() {
     console.log("this works");
-    var searchString = "33e378e1";
+    var searchString = "high+on+fire";
+    searchSetlist(searchString);
+  });
+
+  $("#api-button-6").on("click", function() {
+    console.log("Setlist Selected");
+    var searchString = "23f8b003";
     getSetlist(searchString);
   });
 
+  $(".aSong").on("click", function() {
+    //possible function
+  });
+
+  //gereate the spoitfy playlist
+  //use class setlist for ul
   function listSetlistRefined(obj, isSongs) {
     for (var i = 0; i < obj.setlist.length; i++) {
-      //will only do this if 
+      //will only do this if
       //this will populate the array with the refined json object
       $(".setlist").clear();
       songsArr.push(obj.setlist[0].sets.set[0].songs[i].name);
       var b = $("<div><p>" + obj.setlist.sets[0].songs[i].name + "</p></div>");
       $(b).attr({
-        "idName": "songResponse" + i,
-        "idHash": obj.setlist[i].id,
-        "class": "aSong"
+        idName: "songResponse" + i,
+        idHash: obj.setlist[i].id,
+        class: "aSong"
       });
     }
   }
@@ -155,11 +163,14 @@ jQuery(function ($) {
       console.log(data);
       userPlaylistURI = data.uri;
       userPlaylistID = data.id;
+      //call generateSpotifyPlaylist and populate with our tracks
+      generateSpotifyPlaylist();
     });
   }
 
   //setlist <div> clicked, generate playlists w/ songs & refresh widget
   function generateSpotifyPlaylist() {
+    console.log("Inside generateSpotifyPlaylist");
     $.ajax({
       url: "/update_spotify_playlist",
       data: {
@@ -170,7 +181,15 @@ jQuery(function ($) {
       }
     }).done(function() {
       console.log("Updated Playlist!");
+      updateSpotifyWidget();
     });
+  }
+
+  //update the spotify widget with the newly generated playlist
+  function updateSpotifyWidget() {
+    console.log("Updating Spotify Widget");
+    $(".songWidget").empty();
+    $(".songWidget").html("<iframe src='https://open.spotify.com/embed?uri=" + userPlaylistURI + "' width='300' height='380' frameborder='0' allowtransparency='true'></iframe>");
   }
 
   //search spotify for string and specified type (artist, album, track)
@@ -182,26 +201,76 @@ jQuery(function ($) {
         type: searchType,
         access_token: access_token
       }
-    }).done(function (data) {
+    }).done(function(data) {
       console.log(data);
       return data;
     });
   }
 
-  //search setlist.fm for setlist and call listSetlist with the results
+  //get artist setlists from setlist.fm
   function searchSetlist(searchString) {
     $.ajax({
       url: "/search_setlist",
       data: {
         artistName: searchString
       }
-    }).done(function (data) {
-      console.log(data);
-      listSetlist(data);
+    }).done(function(data) {
+      vagueJSON = data;
+      console.log(vagueJSON);
     });
   }
 
-  //get setlist info from setlist.fm
+  //generate string w/ spotify track uri's
+  function generateSpotifyTrackString() {
+    console.log("Inside Track Generator");
+    var numOfTracks = refinedJSON.sets.set[0].song.length;
+    var counter = 0;
+    console.log(numOfTracks);
+
+    function getTrackURI() {
+      if (counter < numOfTracks) {
+        var searchString =
+          refinedJSON.artist.name +
+          "+" +
+          refinedJSON.sets.set[0].song[counter].name;
+        console.log(searchString);
+        $.ajax({
+          url: "/search_spotify",
+          data: {
+            q: searchString,
+            type: "track",
+            access_token: access_token
+          }
+        }).done(function(data) {
+          console.log(data);
+          if (spotifyTrackURIs != "") {
+            spotifyTrackURIs += "," + data.tracks.items[0].uri;
+          } else {
+            spotifyTrackURIs = data.tracks.items[0].uri;
+          }
+          console.log(spotifyTrackURIs);
+          counter++;
+          if (counter == numOfTracks) {
+            if (userPlaylistURI == "") {
+              //playlist doesn't exist, create one then populate
+              createSpotifyPlaylist();
+            } else {
+              //playlist exists, populate with our tracks
+              generateSpotifyPlaylist();
+            }
+          } else {
+            getTrackURI();
+          }
+        });
+      }
+    }
+
+    if (counter < numOfTracks) {
+      getTrackURI();
+    }
+  }
+
+  //search setlist.fm for setlist and call function to generate string for playlist generation
   function getSetlist(searchString) {
     $.ajax({
       url: "/get_setlist",
@@ -209,8 +278,11 @@ jQuery(function ($) {
         setlistID: searchString
       }
     }).done(function(data) {
-      console.log(data);
-      // listSetlist(data);
+      refinedJSON = data;
+      console.log(refinedJSON);
+      console.log("Calling Track Generator");
+      spotifyTrackURIs = "";
+      generateSpotifyTrackString();
     });
   }
 });
