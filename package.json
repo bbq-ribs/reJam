@@ -4,7 +4,8 @@
   "description": "Create a Spotify playlist based on a setlist.fm setlist",
   "version": "0.0.1",
   "scripts": {
-    "dev": "nodemon ./secret_sauce/app.js"
+    "dev": "nodemon ./secret_sauce/app.js",
+    "start": "node ./secret_sauce/app.js"
   },
   "dependencies": {
     "cookie-parser": "1.3.2",
