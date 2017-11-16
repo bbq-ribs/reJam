@@ -19,13 +19,11 @@
     <!--My override stylesheet-->
     <link rel="stylesheet" href="./assets/css/style.css">
 
-    <title>The Secret Sauce</title>
+    <title>reJam</title>
 </head>
+
 <body>
-    <!-- Modal Trigger -->
-  <!--   <a class="waves-effect waves-light btn modal-trigger" href="#loginModal">Modal</a> -->
-    
-    <!-- Modal Structure -->
+
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <h4>Hey You!</h4>
@@ -35,26 +33,27 @@
             <a href="/login" class="modal-action modal-close waves-effect waves-green btn-flat">Login</a>
         </div>
     </div>
+
 <header>
+
     <div class="container">
         <a href="#!" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons black-text">menu</i></a>
     </div>
 
     <ul id="nav-mobile" class="side-nav fixed setlist-bg white-text" style="transform: translateX(0%);">
          <div class="user-view" id="setlist-bg">
-      <!--  <div class="background"> -->
             <div class="songWidget">
-                <iframe src="https://open.spotify.com/embed?uri=spotify:user:fyffest2013:playlist:6cOVGhHzKFFVhsfqXqFVwv" width="300"
-                    height="380" frameborder="0" allowtransparency="true"></iframe>
+                <iframe src="https://open.spotify.com/embed?uri=spotify:user:fyffest2013:playlist:6cOVGhHzKFFVhsfqXqFVwv"
+                        width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
             </div>
-
-        <!-- </div> -->
-            <div class="setlist">set list play song here</div>
+            <div class="setlist white-text"></div>
         </div>
-
     </ul>
+
 </header>
+
 <main>
+
 <div id="index-banner" class="parallax-container mediaChange">
         <div class="section no-pad-bot">
             <div class="container mediaChange1">
@@ -64,22 +63,18 @@
                     <div class="other">
                     <div style="margin-top: -15px;" class="input-field row center">
                         <input style="background: white; padding-left: 0rem; margin-left: 29px" class="input-group" id="artist-search"  type="search" placeholder="Artist  ">
-                        <button style="margin-top: -10px;" class="btn waves-effect waves-light black" id="search-button" type="submit" name="action">Search
-                        <i class="material-icons right">search</i>
-                    </button>
-<!-- <<<<<<< rudy1
-=======
-                        <!--  <a href="#" id="submit" class="btn-large waves-effect waves-light black">Search</a> -->
-<!-- >>>>>>> master -->
+                        <a href="#gotoDiv"> <button style="margin-top: -10px;" class="btn waves-effect waves-light black" id="search-button" type="submit" name="action">Search
+                        <i class="material-icons right">search</i></button>
+                        </a>
                     </div>
                     </div>
             </div>
         </div>
+
         <div class="parallax">
-            <video class="vid-clip" autoplay loop muted poster="screenshot.jpg" src="./assets/images/giphy.mp4"></video><!-- <img src="./assets/images/parallax6.jpg" alt="..."> -->
+            <video class="vid-clip" autoplay loop muted poster="screenshot.jpg" src="./assets/images/giphy.mp4"></video>
         </div>
 </div>
-
 
     <div class="container">
         <div class="section">
@@ -93,7 +88,6 @@
                         We will then generate a Spotify playlist for you based on the performance set from the show you selected.</h5>
                      </div>
             </div>
-
         </div>
     </div>
 
@@ -106,30 +100,31 @@
                 </div>
             </div>
         </div>
-        <div class="parallax"><img src="./assets/images/parallax2.jpg" alt="..."></div>
+        <div class="parallax"><img src="./assets/images/parallax2.jpg" alt="...">
+        </div>
     </div>
 
 
     <div class="container">
-        <div class="section">
+        <div class="section" id="gotoDiv">
             <div class="row">
                 <div class="col l12 m12 s12">
-                    <h4 class="black-text artist"></h4>
+                    <h3 style="color: #4d586b;" class=" artist"></h3>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col l4 m4 s4">
-                    <div class="black-text venue"></div>
+                    <a href="#!"> <div class="blue-text venue"></div> </a>
                 </div>
                 <div class="col l4 m4 s4">
-                    <div class="black-text city"></div>
+                    <a href="#!"> <div class="purple-text city"></div> </a>
                 </div>
                 <div class="col l4 m4 s4">
-                    <div class="black-text date"></div>
+                    <a href="#!"> <div style="color: #4d586b;" class="date"></div> </a>
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="fixed-action-btn">
@@ -142,8 +137,6 @@
         </ul>
     </div>
 
-
-
     <div class="parallax-container">
         <div class="section no-pad-bot">
             <div class="container">
@@ -152,7 +145,8 @@
             </div>
         </div>
         <div class="parallax">
-            <img src="./assets/images/parallaxgif..gif" alt="...."> </div>
+            <img src="./assets/images/parallaxgif..gif" alt="....">
+        </div>
     </div>
 
 </main>
@@ -162,34 +156,30 @@
             <div class="col l3 m3 s6 ">
                 <h5 class="white-text">About Us</h5>
                 <ul>
-                   <!-- <li><a href="#!" class="white-text"><i class="fa fa-facebook-official fa-4x" aria-hidden="true"></i></a></li> -->
                     <li><a class="blue-text" href="#!"><i class="fa fa-users" aria-hidden="true"></i> Meet the Team</a></li>
                     <li><a class="blue-text" href="https://goo.gl/maps/DVcSZfxL2F32" target="_blank"><i class="fa fa-building" aria-hidden="true"></i> Company Info</a></li>
                     <li><a class="blue-text" href="mailto:musicrejam@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i> Email Us</a></li>
                     <li><a class="blue-text" href="#!"><i class="fa fa-terminal" aria-hidden="true"></i> Coming Soon</a></li>
                 </ul>
             </div>
+
             <div class="col l3 m3 s6 ">
                 <h5 class="white-text">Our Work</h5>
                 <ul>
-                  <!--  <li><a class="white-text" href="#!"><i class="fa fa-github fa-4x" aria-hidden="true"></i> </a></li> -->
                     <li><a class="blue-text" href="https://quentinhalsey.github.io/week-4-game/" target="_blank"><i class="fa fa-database" aria-hidden="true"></i> Game App</a></li>
                     <li><a class="blue-text" href="https://modemtones.github.io/Hangman-Game/" target="_blank"><i class="fa fa-file-text" aria-hidden="true"></i> Hangman-Game</a></li>
                     <li><a class="blue-text" href="https://rudytorres714.github.io/week-4-game/" target="_blank"><i class="fa fa-github" aria-hidden="true"></i> Crystal-Game</a></li>
                     <li><a class="blue-text" href="https://ronronrecords.github.io/Psychic-Game/" target="_blank"><i class="fa fa-code-fork" aria-hidden="true"></i> Physchic-Game</a></li>
-
-
                 </ul>
             </div>
+
             <div class="col l3 m3 s6">
                 <h5 class="white-text">Contact Us</h5>
                 <ul>
-                  <!--  <li><a class="white-text" href="#!"><i class="fa fa-twitter fa-4x" aria-hidden="true"></i> </a></li> -->
                     <li><a class="blue-text" href="https://goo.gl/maps/DVcSZfxL2F32" target="_blank"><i class="fa fa-address-card" aria-hidden="true"></i> 1505 E. Peltason Drive</a></li>
                     <li><a class="blue-text" href="https://goo.gl/maps/DVcSZfxL2F32" target="_blank">Suite 3010</a></li>
                     <li><a class="blue-text" href="https://goo.gl/maps/DVcSZfxL2F32" target="_blank"> Irvine, CA 92617</a></li>
                     <li><a class="blue-text" href="tel:555-555-1212"><i class="fa fa-phone" aria-hidden="true"></i> 800-999-9999</a></li>
-
                 </ul>
             </div>
 
@@ -200,32 +190,28 @@
                     <li><a class="blue-text" href="https://www.facebook.com/musicrejam" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a></li>
                     <li><a class="blue-text" href="https://www.youtube.com/channel/UCOmRrTa0thJy5V7CRpbjx-g?view_as=subscriber" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i> Youtube</a></li>
                     <li><a class="blue-text" href="https://www.instagram.com/musicrejam/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i> Instagram</a></li>
-
                 </ul>
             </div>
+
         </div>
     </div>
+
     <div class="footer-copyright" style="background: #4d586b">
-
-
         <div class="container center">
             <i class="fa fa-copyright" aria-hidden="true"></i>  Copyright 2017 BBQ RIBS
         </div>
     </div>
+
 </footer>
 
-
-
-    <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
     <script src="/assets/javascript/rejam.js"></script>
-   <!--  <script src="js/init.js"></script> -->
-<script>
-    $(document).ready(function(){
-        $('.parallax').parallax();
-    });
-</script>
+    <script>
+        $(document).ready(function(){
+            $('.parallax').parallax();
+        });
+    </script>
     <script>$(".button-collapse").sideNav();</script>
 
 </body>

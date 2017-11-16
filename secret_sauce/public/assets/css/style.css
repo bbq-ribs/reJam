@@ -1,7 +1,7 @@
  .container h1 {
         color: white;
     }
-    
+
     .navcontrol {
         color: black;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -27,14 +27,17 @@
     .footer {
         text-align: center;
     }
+
     .input-group    {
         text-align: center;
         width: 50%;
     }
+
     .go {
         background: black;
         color: white;
     }
+
     .navbar-fixed-left  {
         width: 30%;
         position: fixed;
@@ -43,136 +46,143 @@
         background: black;
         color: white;
     }
+
     h1  {
         text-align: center;
     }
+
     .form-control   {
         text-align: center;
     }
+
     .pull-right {
         text-align: right;
     }
 
-/* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
-
-nav ul a,
-nav .brand-logo {
+    nav ul a,
+    nav .brand-logo {
     color: #444;
-}
+    }
 
-p {
-    line-height: 2rem;
-}
+    p {
+        line-height: 2rem;
+    }
 
-.button-collapse {
-    color: #26a69a;
-}
+    .button-collapse {
+        color: #26a69a;
+    }
 
-.parallax-container {
-    min-height: 380px;
-    line-height: 0;
-    height: auto;
-    color: rgba(255,255,255,.9);
-}
-.parallax-container .section {
-    width: 100%;
-}
+    .parallax-container {
+        min-height: 380px;
+        line-height: 0;
+        height: auto;
+        color: rgba(255,255,255,.9);
+    }
 
-@media only screen and (max-width : 992px) {
     .parallax-container .section {
+        width: 100%;
+    }
+
+    @media only screen and (max-width : 992px) {
+        .parallax-container .section {
         position: absolute;
         top: 40%;
-    }
-    #index-banner .section {
+    }  #index-banner .section {
         top: 10%;
     }
-}
 
-@media only screen and (max-width : 600px) {
-    #index-banner .section {
+    }
+
+    @media only screen and (max-width : 600px) {
+        #index-banner .section {
         top: 0;
     }
-}
+    }
 
-.icon-block {
-    padding: 0 15px;
-}
-.icon-block .material-icons {
-    font-size: inherit;
-}
+    .icon-block {
+        padding: 0 15px;
+    }
 
-footer.page-footer {
-    margin: 0;
-}
-.firstOne   {
-    background: black;
-}
-.other  {
-    text-align: center;
-    width: 50%;
-    margin-left: 25%;
-}
-.input-field input [type=search]{
-    padding-left: 2rem;
+    .icon-block .material-icons {
+        font-size: inherit;
+    }
 
-}
-.other1 {
-    padding-left: 2rem;
-}
+    footer.page-footer {
+        margin: 0;
+    }
 
- header, main, footer {
-     padding-left: 300px;
- }
+    .firstOne   {
+        background: black;
+    }
 
- @media only screen and (max-width : 992px) {
+    .other  {
+        text-align: center;
+        width: 50%;
+        margin-left: 25%;
+    }
+
+    .input-field input [type=search]{
+        padding-left: 2rem;
+    }
+
+    .other1 {
+        padding-left: 2rem;
+    }
+
      header, main, footer {
-         padding-left: 0;
+         padding-left: 300px;
      }
- }
 
- .change-me {
-     background: #3c4554;
-     color: blue;
- }
+     @media only screen and (max-width : 992px) {
+         header, main, footer {
+             padding-left: 0;
+         }
+     }
 
- .foot-change   {
-     background-color: white;
- }
- .setlist   {
-     margin-left: 15px;
- }
- .setlist-bg    {
-     background: #4d586b
- }
- .apiDiv {
-     text-align: center;
- }
- .btn-space {
-     margin-top: 10px;
- }
- .vid-clip  {
-     width: 100%;
- }
- @media only screen and (max-width: 590px) {
-     .mediaChange {
-         min-height: 220px;
+     .change-me {
+         background: #3c4554;
+         color: blue;
      }
- }
- @media only screen and (min-width: 591px) {
-     .mediaChange1{
-         margin-top: 30px;
-     }
-     .mediaChange {
-         min-height: 380px;
-     }
- }
 
- .star  {
-     color: rebeccapurple;
- }
+     .foot-change   {
+         background-color: white;
+     }
+
+     .setlist   {
+         margin-left: 15px;
+     }
+
+     .setlist-bg    {
+         background: #4d586b
+     }
+
+     .apiDiv {
+         text-align: center;
+     }
+
+     .btn-space {
+         margin-top: 10px;
+     }
+
+     .vid-clip  {
+         width: 100%;
+     }
+
+     @media only screen and (max-width: 590px) {
+         .mediaChange {
+             min-height: 220px;
+         }
+     }
+
+     @media only screen and (min-width: 591px) {
+         .mediaChange1{
+             margin-top: 30px;
+         }
+         .mediaChange {
+             min-height: 380px;
+         }
+     }
+
+     .star  {
+         color: rebeccapurple;
+     }
