@@ -46,7 +46,8 @@
                 <iframe src="https://open.spotify.com/embed?uri=spotify:user:fyffest2013:playlist:6cOVGhHzKFFVhsfqXqFVwv"
                         width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
             </div>
-            <div class="setlist white-text"></div>
+             <div class="center"><h5><i class="small material-icons white-text"> library_music</i> re<span class="star ion-ios-star"></span>Jam this Setlist</h5></div>
+             <div class="setlist white-text"></div>
         </div>
     </ul>
 
@@ -62,8 +63,8 @@
                     </div>
                     <div class="other">
                     <div style="margin-top: -15px;" class="input-field row center">
-                        <input style="background: white; padding-left: 0rem; margin-left: 29px" class="input-group" id="artist-search"  type="search" placeholder="Artist  ">
-                        <a href="#gotoDiv"> <button style="margin-top: -10px;" class="btn waves-effect waves-light black" id="search-button" type="submit" name="action">Search
+                        <input style="background: #ffffffd9; padding-left: 0rem; margin-left: 6%; line-height: normal" class="input-group" id="artist-search"  type="search" placeholder="Artist  ">
+                        <a href="#gotoDiv"> <button style="margin-top: -10px; background-color: #00000087" class="btn waves-effect waves-light" id="search-button" type="submit" name="action">Search
                         <i class="material-icons right">search</i></button>
                         </a>
                     </div>
@@ -72,9 +73,11 @@
         </div>
 
         <div class="parallax">
-            <video class="vid-clip" autoplay loop muted poster="screenshot.jpg" src="./assets/images/giphy.mp4"></video>
+            <video preload="yes" class="vid-clip" autoplay loop> <source src="assets/images/giphy.mp4" type="video/mp4"> </video>
         </div>
 </div>
+
+        <section style="background-color: black">
 
         <div class="container">
             <div class="section">
@@ -82,20 +85,21 @@
                 <div class="row">
                     <div class="col s12 center">
                         <h2><i class="fa fa-file-text-o purple-text" aria-hidden="true"></i></h2>
-                        <h4>How it works: </h4> <br>
-                        <h5>Enter an artist. <br><br> 
+                        <h4 class="white-text">How it works: </h4> <br>
+                        <h5 class="white-text">Enter an artist. <br><br>
                           Select the corresponding show you would like from recent performances.<br><br> 
                           We will then generate a Spotify playlist for you based on the performance set from the show you selected.</h5>
                     </div>
                 </div>
             </div>
         </div>
+        </section>
       
         <div class="parallax-container valign-wrapper">
             <div class="section no-pad-bot">
                 <div class="container">
                     <div class="row center">
-                        <h3 style="margin-top: -50px" class="header col s12"> Bridging the gap between your ears<span class="ion-headphone"></span></h3>
+                        <h3 style="margin-top: -50px; color:#ffffffd9" class="header col s12"> Bridging the gap between your ears<span class="ion-headphone"></span></h3>
                     </div>
                 </div>
             </div>  
@@ -103,35 +107,42 @@
         </div>
     </div>
 
-    <div class="container">
+        <section style="background-color: black">
+
+        <div class="container">
         <div class="section" id="gotoDiv">
             <div class="row">
                 <div class="col l12 m12 s12">
+                    <i class="medium material-icons" style="color: #4d586b; float: left; margin-top: 2.5%; margin-right: 3%">person</i>
                     <h3 style="color: #4d586b;" class=" artist"></h3>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col l4 m4 s4">
-                    <a href="#!"> <div class="blue-text venue"></div> </a>
+                    <i class="medium material-icons blue-text"> view_carousel</i>
+                    <a href="#!"> <div class="blue-text venue mate"></div> </a>
                 </div>
-                <div class="col l4 m4 s4">
+                <div class="col l4 m4 s4" style="padding-left: 10%">
+                    <i class="medium material-icons purple-text"> location_on</i>
                     <a href="#!"> <div class="purple-text city"></div> </a>
                 </div>
-                <div class="col l4 m4 s4">
+                <div class="col l4 m4 s4" style="padding-left: 12%">
+                    <i class="medium material-icons" style="color: #4d586b"> event</i>
                     <a href="#!"> <div style="color: #4d586b;" class="date"></div> </a>
                 </div>
             </div>
         </div>
     </div>
+        </section>
           
         <div class="fixed-action-btn">
-            <a href="#!" id="team" class="btn-floating purple btn-large"> <i class="fa fa-users" aria-hidden="true"></i></a>
+            <a href="#!" id="team" style="background-color: #9c27b09e" class="btn-floating btn-large"> <i class="fa fa-users" aria-hidden="true"></i></a>
             <ul>
-                <li><a href="https://github.com/modemtones" target="_blank" class="btn-floating red btn-large red-text"><i class="large material-icons">assignment_ind</i></a><b style="color: hotpink">Brandon</b> </li>
-                <li><a href="https://github.com/ronronrecords" target="_blank" class="btn-floating blue btn-large"><i class="large material-icons">assignment_ind</i></a><b style="color: hotpink">Bernard</b></li>
-                <li><a href="https://github.com/quentinHalsey" target="_blank" class="btn-floating green btn-large"><i class="large material-icons">assignment_ind</i></a><b style="color: hotpink">Quentin</b></li>
-                <li><a href="https://github.com/rudytorres714" target="_blank" class="btn-floating orange btn-large"><i class="large material-icons">assignment_ind</i></a><b style="color: hotpink">Rudy</b></li>
+                <li><a href="https://github.com/modemtones" target="_blank" style="background-color: #f44336a6" class="btn-floating btn-large"><i class="large material-icons">assignment_ind</i></a><b style="color: hotpink">Brandon</b> </li>
+                <li><a href="https://github.com/ronronrecords" target="_blank" style="background-color: #2196f3ab" class="btn-floating btn-large"><i class="large material-icons">assignment_ind</i></a><b style="color: hotpink">Bernard</b></li>
+                <li><a href="https://github.com/quentinHalsey" target="_blank" style="background-color: #4caf50b0" class="btn-floating btn-large"><i class="large material-icons">assignment_ind</i></a><b style="color: hotpink">Quentin</b></li>
+                <li><a href="https://github.com/rudytorres714" target="_blank" style="background-color: #ff9800ab" class="btn-floating btn-large"><i class="large material-icons">assignment_ind</i></a><b style="color: hotpink">Rudy</b></li>
             </ul>
         </div>
 
@@ -139,6 +150,7 @@
         <div class="section no-pad-bot">
             <div class="container">
                 <div class="row center">
+
                 </div>
             </div>
         </div>
